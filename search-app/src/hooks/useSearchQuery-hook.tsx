@@ -2,8 +2,11 @@ import { useEffect, useState } from 'react';
 
 function useSearchQuery() {
   const [searchQueryFromLS, setSearchQuery] = useState(() => {
-    const queryFromLS = localStorage.getItem('search-value');
-    return queryFromLS !== null ? queryFromLS : '';
+    if (typeof window !== 'undefined') {
+      const queryFromLS = localStorage.getItem('search-value');
+      return queryFromLS !== null ? queryFromLS : '';
+    }
+    return '';
   });
 
   const setSearchQueryToLS = (query: string) => {

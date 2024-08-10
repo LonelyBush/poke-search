@@ -10,7 +10,7 @@ function EmptySearchResult() {
       </div>
       <img
         className={styles['empty-result-img']}
-        src={psyduckImg}
+        src={psyduckImg.src}
         alt="psyduch-img"
       />
     </div>

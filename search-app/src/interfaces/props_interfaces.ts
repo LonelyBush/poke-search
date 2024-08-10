@@ -1,4 +1,4 @@
-import { FormEvent, SetStateAction } from 'react';
+import { FormEvent } from 'react';
 import { PokeStats, PokeType } from './api_interfaces';
 
 export interface ItemsListProps {
@@ -20,8 +20,6 @@ export interface PokemonFlavorProps {
 export interface SearchBarProps {
   handleSubmit: (e: FormEvent<HTMLFormElement>) => void;
   searchValue: string | null;
-
-  setTheme: React.Dispatch<SetStateAction<string>>;
 }
 
 export interface PaginationProps {

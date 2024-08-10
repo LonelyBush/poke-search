@@ -1,14 +1,19 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
-import { useContext } from 'react';
-import ThemeContext from '../../../context/theme_context';
 import styles from './close_btn-style.module.css';
+import useTheme from '../../../hooks/useTheme-hook';
 
-function CloseBtn({ onClick }: { onClick: () => void }) {
-  const theme = useContext(ThemeContext);
+function CloseBtn({
+  onClick,
+  customStyle,
+}: {
+  customStyle: string;
+  onClick: () => void;
+}) {
+  const { theme } = useTheme();
   return (
     <button
       data-testid="close-btn"
-      className={`${styles[`close-btn`]} ${styles[`${theme}`]}`}
+      className={`${styles[`close-btn`]} ${styles[`${theme}`]} ${customStyle}`}
       onClick={onClick}
       type="button"
     />

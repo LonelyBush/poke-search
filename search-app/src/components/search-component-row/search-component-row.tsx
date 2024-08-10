@@ -1,19 +1,21 @@
-import { NavLink } from 'react-router-dom';
+import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
-import { ChangeEvent, useContext, useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
+import { useParams } from 'next/navigation';
 import { addPokemon, removePokemon } from '../../redux_slice/redux_slice';
 import { SearchRowComponentProps } from '../../interfaces/props_interfaces';
 import styles from './search-component-row-style.module.css';
 import pokeballStatic from '../../../assets/pics/pokeball.png';
 import { useGetPokemonByNameQuery } from '../../api/getPokemons';
-import ThemeContext from '../../context/theme_context';
 import CheckBox from '../ui/check_box/check_box';
 import { RootState } from '../../store/store';
+import useTheme from '../../hooks/useTheme-hook';
 
 function SearchComponentRow({ name, id }: SearchRowComponentProps) {
   const store = useSelector((state: RootState) => state.pokeStore);
   const dispatch = useDispatch();
   const { data, isLoading } = useGetPokemonByNameQuery(name);
+  const { pageNum, pokeName } = useParams();
   const [checked, setChecked] = useState<boolean>(false);
   const HandleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     setChecked(!checked);
@@ -33,21 +35,17 @@ function SearchComponentRow({ name, id }: SearchRowComponentProps) {
     setChecked(store.find((elem) => elem.name === name) !== undefined);
   }, [store]);
 
-  const theme = useContext(ThemeContext);
+  const { theme } = useTheme();
   return (
     <div className={styles['search-row-container']}>
-      <NavLink
-        to={`detail/${name}`}
-        className={({ isActive }) =>
-          isActive
-            ? `${styles[`search-row-content`]} ${styles[`${theme}`]} ${styles.active}`
-            : `${styles[`search-row-content`]} ${styles[`${theme}`]}`
-        }
+      <Link
+        href={`/search/${pageNum}/detail/${name}`}
+        className={`${styles[`search-row-content`]} ${styles[`${theme}`]} ${pokeName === name ? styles.active : ''}`}
       >
         {isLoading ? (
           <img
             className={styles['loading-prop-img']}
-            src={pokeballStatic}
+            src={pokeballStatic.src}
             alt="pokeball"
           />
         ) : (
@@ -57,8 +55,10 @@ function SearchComponentRow({ name, id }: SearchRowComponentProps) {
             alt="small-poke-img"
           />
         )}
-        <p>{name.charAt(0).toUpperCase() + name.slice(1)}</p>
-      </NavLink>
+        <p className={styles['row-name']}>
+          {name.charAt(0).toUpperCase() + name.slice(1)}
+        </p>
+      </Link>
       <CheckBox
         theme={theme}
         checked={checked}

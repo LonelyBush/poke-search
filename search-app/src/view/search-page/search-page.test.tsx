@@ -1,17 +1,23 @@
 import { describe, expect, it } from 'vitest';
 import { render } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
-import { useState } from 'react';
 import SearchPage from './search-page';
 import ProviderWrapper from '../../utils/provider_wrapper';
-import ThemeContext from '../../context/theme_context';
+import { ThemeProvider } from '../../context/theme_context';
 
 describe('Search-page-test', () => {
   it('Should correctly render ItemsList and SearchBar component', () => {
     const { getByText, getByTestId } = render(
       <MemoryRouter initialEntries={['/search/1']}>
         <Routes>
-          <Route path="/search/:pageNum" element={<SearchPage />} />
+          <Route
+            path="/search/:pageNum"
+            element={
+              <SearchPage>
+                <div />
+              </SearchPage>
+            }
+          />
         </Routes>
       </MemoryRouter>,
       {
@@ -23,11 +29,12 @@ describe('Search-page-test', () => {
   });
   it('Applies the theme from the context', () => {
     function TestComponent() {
-      const [theme] = useState('dark');
       return (
-        <ThemeContext.Provider value={theme}>
-          <SearchPage />
-        </ThemeContext.Provider>
+        <ThemeProvider>
+          <SearchPage>
+            <div />
+          </SearchPage>
+        </ThemeProvider>
       );
     }
 

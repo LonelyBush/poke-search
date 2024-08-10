@@ -16,14 +16,14 @@ interface IconCollectionInterface {
 }
 
 export const iconCollection: IconCollectionInterface = {
-  hp: hpIcon,
-  defense: defIcon,
-  attack: atackIcon,
-  speed: speedIcon,
+  hp: hpIcon.src,
+  defense: defIcon.src,
+  attack: atackIcon.src,
+  speed: speedIcon.src,
 };
 export const darkIconCollection: IconCollectionInterface = {
-  hp: hpIconDark,
-  defense: defIconDark,
-  attack: atackIconDark,
-  speed: speedIconDark,
+  hp: hpIconDark.src,
+  defense: defIconDark.src,
+  attack: atackIconDark.src,
+  speed: speedIconDark.src,
 };

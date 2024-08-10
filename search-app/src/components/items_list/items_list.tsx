@@ -1,5 +1,5 @@
-import { useContext, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import styles from './items_list_style.module.css';
 import { ItemsListProps } from '../../interfaces/props_interfaces';
 import { PokeCall, PokeResult } from '../../interfaces/api_interfaces';
@@ -9,18 +9,18 @@ import Pagination from '../pagination/pagination-items-list';
 import SearchComponentRow from '../search-component-row/search-component-row';
 import { useGetAllPokemonQuery } from '../../api/getPokemons';
 import useSearchQuery from '../../hooks/useSearchQuery-hook';
-import ThemeContext from '../../context/theme_context';
+import useTheme from '../../hooks/useTheme-hook';
 
 function ItemsList({ searchValue }: ItemsListProps) {
   const { data, isLoading } = useGetAllPokemonQuery('300', {
     refetchOnMountOrArgChange: true,
   });
   const { searchQueryFromLS, setSearchQueryToLS } = useSearchQuery();
-  const theme = useContext(ThemeContext);
+  const { theme } = useTheme();
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [postPerPage] = useState<number>(20);
   const [hasError, setError] = useState<boolean>(false);
-  const { pageNum } = useParams();
+  const router = useRouter();
 
   let resultsLength;
   let itemListComponent;
@@ -63,16 +63,19 @@ function ItemsList({ searchValue }: ItemsListProps) {
     }
   }
   useEffect(() => {
-    if (pageNum) {
-      if (Number.isNaN(Number(pageNum)) || Number(pageNum) > indexOfLastPage) {
+    if (router.query.pageNum) {
+      if (
+        Number.isNaN(Number(router.query.pageNum)) ||
+        Number(router.query.pageNum) > indexOfLastPage
+      ) {
         setError(true);
       } else {
-        setCurrentPage(Number(pageNum));
+        setCurrentPage(Number(router.query.pageNum));
       }
     } else {
       setCurrentPage(1);
     }
-  }, [searchValue, pageNum]);
+  }, [searchValue, router.query.pageNum]);
 
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber);

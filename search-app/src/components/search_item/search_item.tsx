@@ -1,7 +1,6 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable jsx-a11y/control-has-associated-label */
-import { useNavigate, useParams } from 'react-router-dom';
-import { useContext } from 'react';
+import { useRouter } from 'next/router';
 import styles from './search_item_style.module.css';
 import PokemonStats from '../pokemon_stats/pokemon_stats';
 import PokemonTypes from '../pokemon_types/pokemon_types';
@@ -9,17 +8,19 @@ import PokemonFlavorText from '../pokemon_flavor-text/pokemon_flavor-text';
 import LoadingSpinner from '../loading_spinner/loading_spinner';
 import { useGetPokemonByNameQuery } from '../../api/getPokemons';
 import CloseBtn from '../ui/close_btn/close_btn';
-import ThemeContext from '../../context/theme_context';
+import useTheme from '../../hooks/useTheme-hook';
 
 function SearchItem() {
-  const theme = useContext(ThemeContext);
-  const navigate = useNavigate();
-  const { pageNum, pokeName } = useParams();
+  const { theme } = useTheme();
+  const router = useRouter();
   const { data, isLoading } = useGetPokemonByNameQuery(
-    pokeName !== undefined ? pokeName : '',
+    router.query.pokeName !== undefined &&
+      typeof router.query.pokeName === 'string'
+      ? router.query.pokeName
+      : '',
   );
   const handleClose = () => {
-    navigate(`/search/${pageNum}`);
+    router.push(`/search/${router.query.pageNum}`);
   };
   return isLoading ? (
     <LoadingSpinner />
@@ -45,7 +46,7 @@ function SearchItem() {
           <PokemonFlavorText name={data.name} />
         )}
       </div>
-      <CloseBtn onClick={handleClose} />
+      <CloseBtn onClick={handleClose} customStyle="" />
     </div>
   ) : null;
 }

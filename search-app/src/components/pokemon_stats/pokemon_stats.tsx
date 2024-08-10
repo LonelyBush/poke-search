@@ -1,11 +1,10 @@
-import { useContext } from 'react';
 import { StatsContainerProps } from '../../interfaces/props_interfaces';
 import { darkIconCollection, iconCollection } from './icon_collection-const';
 import styles from './pokemon_stats_style.module.css';
-import ThemeContext from '../../context/theme_context';
+import useTheme from '../../hooks/useTheme-hook';
 
 function PokemonStats({ stats }: StatsContainerProps) {
-  const theme = useContext(ThemeContext);
+  const { theme } = useTheme();
   const getOnlyMainStats = stats.filter((elem) => {
     return (
       elem.stat.name !== 'special-defense' &&

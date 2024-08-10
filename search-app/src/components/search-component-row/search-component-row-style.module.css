@@ -5,6 +5,10 @@
     
 }
 
+.row-name{
+    margin: 0;
+}
+
 .search-row-content{
     display: flex;
     align-items: center;
