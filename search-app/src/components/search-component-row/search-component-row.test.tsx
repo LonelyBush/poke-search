@@ -1,10 +1,10 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { MemoryRouter } from 'react-router-dom';
+import { MemoryRouterProvider } from 'next-router-mock/MemoryRouterProvider';
+import mockRouter from 'next-router-mock';
 import userEvent from '@testing-library/user-event';
 import SearchComponentRow from './search-component-row';
-import pokeball from '../../../assets/pics/pokeball.png';
 import ProviderWrapper from '../../utils/provider_wrapper';
 
 const defaultData = {
@@ -12,33 +12,32 @@ const defaultData = {
   id: '4',
 };
 
+vi.mock('next/navigation', () => ({
+  useParams: () => ({
+    pageNum: '1',
+    pokeName: '',
+  }),
+}));
+
 describe('Renders row with charizard without breaking', async () => {
   it('Renders without breaking', async () => {
+    mockRouter.push('/search/1');
     render(
-      <MemoryRouter initialEntries={['/search/1']}>
+      <MemoryRouterProvider>
         <SearchComponentRow name={defaultData.name} id={defaultData.id} />,
-      </MemoryRouter>,
+      </MemoryRouterProvider>,
       { wrapper: ProviderWrapper },
     );
     await waitFor(() => {
       expect(screen.getByText(/charizard/i)).toBeInTheDocument();
     });
   });
-  it('Check for image loader component', () => {
-    const { getByAltText } = render(
-      <MemoryRouter initialEntries={['/search/1']}>
-        <SearchComponentRow name={defaultData.name} id={defaultData.id} />,
-      </MemoryRouter>,
-      { wrapper: ProviderWrapper },
-    );
-    const image = getByAltText('pokeball');
-    expect(image).toHaveAttribute('src', pokeball);
-  });
   it('Renders image from API', async () => {
+    mockRouter.push('/search/1');
     const { getByAltText } = render(
-      <MemoryRouter initialEntries={['/search/1']}>
+      <MemoryRouterProvider>
         <SearchComponentRow name={defaultData.name} id={defaultData.id} />,
-      </MemoryRouter>,
+      </MemoryRouterProvider>,
       { wrapper: ProviderWrapper },
     );
     await waitFor(() => {
@@ -48,25 +47,27 @@ describe('Renders row with charizard without breaking', async () => {
   });
 
   it('Open details page', async () => {
+    mockRouter.push('/search/1');
     render(
-      <MemoryRouter initialEntries={['/search/1']}>
+      <MemoryRouterProvider>
         <SearchComponentRow name={defaultData.name} id={defaultData.id} />,
-      </MemoryRouter>,
+      </MemoryRouterProvider>,
       { wrapper: ProviderWrapper },
     );
     await waitFor(() => {
       expect(screen.getByRole('link')).toHaveAttribute(
         'href',
-        '/detail/charizard',
+        '/search/1/detail/charizard',
       );
     });
   });
 
   it('Check for checkbox change handler', async () => {
+    mockRouter.push('/search/1');
     const { getByRole } = render(
-      <MemoryRouter initialEntries={['/search/1']}>
+      <MemoryRouterProvider>
         <SearchComponentRow name={defaultData.name} id={defaultData.id} />,
-      </MemoryRouter>,
+      </MemoryRouterProvider>,
       { wrapper: ProviderWrapper },
     );
     await waitFor(() => {

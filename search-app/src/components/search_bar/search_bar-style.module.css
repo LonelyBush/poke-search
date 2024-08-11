@@ -71,11 +71,41 @@
     display: block;
 }
 
-.close-btn-custom-position {
+.cross-btn {
+    display: flex;
+    align-self: flex-start;
     position: absolute;
-    top: 4.8rem;
-    left: 19.5rem;
-}
+    left: 19rem;
+    top: 4.7rem;
+    width: 32px;
+    height: 32px;
+    opacity: 0.3;
+    border: none; 
+    outline: none;
+    background: transparent;
+    cursor: pointer;
+  }
+  .cross-btn:hover {
+    opacity: 1;
+  }
+  .cross-btn:before, .cross-btn:after {
+    position: absolute;
+    left: 15px;
+    content: ' ';
+    height: 33px;
+    width: 2px;
+    background-color: #333;
+  }
+  .cross-btn:before {
+    transform: rotate(45deg);
+  }
+  .cross-btn:after {
+    transform: rotate(-45deg);
+  }
+
+  .cross-btn.dark::before, .cross-btn.dark:after {
+    background-color: #464f65;
+  }
 
 .submit-btn {
   background: #FF4742;

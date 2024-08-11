@@ -5,7 +5,6 @@ import { ChangeEvent, useEffect, useState } from 'react';
 import { removeAllPokemons } from '../../redux_slice/redux_slice';
 import { SearchBarProps } from '../../interfaces/props_interfaces';
 import styles from './search_bar-style.module.css';
-import CloseBtn from '../ui/close_btn/close_btn';
 import useSearchQuery from '../../hooks/useSearchQuery-hook';
 import ToggleSwitch from '../ui/toggle_switch/toggle_switch';
 import { RootState } from '../../store/store';
@@ -59,13 +58,14 @@ function SearchBar({ handleSubmit, searchValue }: SearchBarProps) {
             *your search query must have no spaces and at least one character
           </span>
           {queryState !== '' && focus ? (
-            <CloseBtn
-              customStyle={styles['close-btn-custom-position']}
+            <button
+              className={`${styles[`cross-btn`]} ${styles[`${theme}`]}`}
               onClick={() => {
                 setFocus(false);
                 setQueryState('');
                 setSearchQueryToLS('');
               }}
+              type="button"
             />
           ) : null}
         </div>

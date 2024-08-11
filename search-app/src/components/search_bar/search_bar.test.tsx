@@ -12,13 +12,11 @@ describe('SearchBar', () => {
     const props: SearchBarProps = {
       handleSubmit: vi.fn((e) => e.preventDefault()),
       searchValue: null,
-      setTheme: vi.fn(),
     };
     const { getByRole } = render(
       <SearchBar
         handleSubmit={props.handleSubmit}
         searchValue={props.searchValue}
-        setTheme={props.setTheme}
       />,
       { wrapper: ProviderWrapper },
     );
@@ -31,13 +29,11 @@ describe('SearchBar', () => {
     const props: SearchBarProps = {
       handleSubmit: vi.fn(),
       searchValue: '',
-      setTheme: vi.fn(),
     };
     render(
       <SearchBar
         handleSubmit={props.handleSubmit}
         searchValue={props.searchValue}
-        setTheme={props.setTheme}
       />,
       { wrapper: ProviderWrapper },
     );
