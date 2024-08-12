@@ -6,6 +6,7 @@ import userEvent from '@testing-library/user-event';
 import SearchComponentRow from './search-component-row';
 import pokeball from '../../../assets/pics/pokeball.png';
 import ProviderWrapper from '../../utils/provider_wrapper';
+import styles from './search-component-row-style.module.css';
 
 const defaultData = {
   name: 'charizard',
@@ -71,7 +72,9 @@ describe('Renders row with charizard without breaking', async () => {
     );
     await waitFor(() => {
       userEvent.click(screen.getByRole('link'));
-      expect(screen.getByRole('link').classList.contains('active')).toBe(true);
+      expect(screen.getByRole('link').classList.contains(styles.active)).toBe(
+        true,
+      );
     });
   });
   it('Check for checkbox change handler', async () => {

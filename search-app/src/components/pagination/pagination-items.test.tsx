@@ -5,6 +5,7 @@ import userEvent from '@testing-library/user-event';
 import Pagination from './pagination-items-list';
 import { PaginationProps } from '../../interfaces/props_interfaces';
 import ProviderWrapper from '../../utils/provider_wrapper';
+import styles from './pagination-items-style.module.css';
 
 describe('Pagination', () => {
   it('Should render without breaking 15 elements', () => {
@@ -45,6 +46,6 @@ describe('Pagination', () => {
       { wrapper: ProviderWrapper },
     );
     userEvent.click(getByRole('link'));
-    expect(getByRole('link').classList.contains('active')).toBe(true);
+    expect(getByRole('link').classList.contains(styles.active)).toBe(true);
   });
 });
