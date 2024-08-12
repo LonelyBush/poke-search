@@ -1,14 +1,14 @@
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { ChangeEvent, useContext, useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { addPokemon, removePokemon } from '../../redux_slice/redux_slice';
 import { SearchRowComponentProps } from '../../interfaces/props_interfaces';
-import './search-component-row-style.css';
+import styles from './search-component-row-style.module.css';
 import pokeballStatic from '../../../assets/pics/pokeball.png';
 import { useGetPokemonByNameQuery } from '../../api/getPokemons';
-import ThemeContext from '../../context/theme_context';
 import CheckBox from '../ui/check_box/check_box';
 import { RootState } from '../../store/store';
+import useTheme from '../../hooks/useTheme-hook';
 
 function SearchComponentRow({ name, id }: SearchRowComponentProps) {
   const store = useSelector((state: RootState) => state.pokeStore);
@@ -33,26 +33,26 @@ function SearchComponentRow({ name, id }: SearchRowComponentProps) {
     setChecked(store.find((elem) => elem.name === name) !== undefined);
   }, [store]);
 
-  const theme = useContext(ThemeContext);
+  const { theme } = useTheme();
   return (
-    <div className="search-row-container">
+    <div className={styles['search-row-container']}>
       <NavLink
         to={`detail/${name}`}
         className={({ isActive }) =>
           isActive
-            ? `search-row-content ${theme} active`
-            : `search-row-content ${theme}`
+            ? `${styles['search-row-content']} ${styles[`${theme}`]} ${styles.active}`
+            : `${styles['search-row-content']} ${styles[`${theme}`]}`
         }
       >
         {isLoading ? (
           <img
-            className="loading-prop-img"
+            className={styles['loading-prop-img']}
             src={pokeballStatic}
             alt="pokeball"
           />
         ) : (
           <img
-            className="small-poke-img"
+            className={styles['small-poke-img']}
             src={data ? data.sprites.front_default : null}
             alt="small-poke-img"
           />

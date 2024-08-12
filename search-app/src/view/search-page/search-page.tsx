@@ -1,17 +1,17 @@
 import { FormEvent, useEffect, useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import ItemsList from '../../components/items_list/items_list';
-import './search-page-style.css';
+import styles from './search-page-style.module.css';
 import { PokeSearchValue } from '../../interfaces/api_interfaces';
 import SearchBar from '../../components/search_bar/search_bar';
 import useSearchQuery from '../../hooks/useSearchQuery-hook';
-import ThemeContext from '../../context/theme_context';
+import useTheme from '../../hooks/useTheme-hook';
 
 interface State extends PokeSearchValue {}
 
 function SearchPage() {
   const { searchQueryFromLS } = useSearchQuery();
-  const [theme, setTheme] = useState<string>('');
+  const { theme, setTheme } = useTheme();
   const navigate = useNavigate();
   const [searchPageState, setSearchPageState] = useState<State>({
     searchValue: '',
@@ -32,19 +32,17 @@ function SearchPage() {
   }, [searchQueryFromLS]);
   const { searchValue } = searchPageState;
   return (
-    <ThemeContext.Provider value={theme}>
-      <div className={`main-content-section ${theme}`}>
-        <div className="side-bar-section">
-          <SearchBar
-            searchValue={searchQueryFromLS}
-            handleSubmit={handleSubmit}
-            setTheme={setTheme}
-          />
-          <ItemsList searchValue={searchValue} />
-        </div>
-        <Outlet />
+    <div className={`${styles['main-content-section']} ${styles[`${theme}`]}`}>
+      <div className={styles['side-bar-section']}>
+        <SearchBar
+          searchValue={searchQueryFromLS}
+          handleSubmit={handleSubmit}
+          setTheme={setTheme}
+        />
+        <ItemsList searchValue={searchValue} />
       </div>
-    </ThemeContext.Provider>
+      <Outlet />
+    </div>
   );
 }
 

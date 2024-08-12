@@ -1,5 +1,5 @@
 import { ChangeEvent } from 'react';
-import './check_box-style.css';
+import styles from './check_box-style.module.css';
 
 function CheckBox({
   id,
@@ -15,17 +15,20 @@ function CheckBox({
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }) {
   return (
-    <div className="check-box-container">
-      <label htmlFor={id} className={`label-wrapper ${theme}`}>
+    <div className={styles['check-box-container']}>
+      <label
+        htmlFor={id}
+        className={`${styles['label-wrapper']} ${styles[`${theme}`]}`}
+      >
         <input
           name={name}
           onChange={onChange}
           id={id}
           type="checkbox"
-          className="checkbox"
+          className={styles.checkbox}
           checked={checked}
         />
-        <span className="checkmark" />
+        <span className={styles.checkmark} />
       </label>
     </div>
   );

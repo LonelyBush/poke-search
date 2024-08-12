@@ -1,16 +1,16 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable react/button-has-type */
 import { useDispatch, useSelector } from 'react-redux';
-import { ChangeEvent, useContext, useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { removeAllPokemons } from '../../redux_slice/redux_slice';
 import { SearchBarProps } from '../../interfaces/props_interfaces';
-import './search_bar-style.css';
+import styles from './search_bar-style.module.css';
 import CloseBtn from '../ui/close_btn/close_btn';
 import useSearchQuery from '../../hooks/useSearchQuery-hook';
 import ToggleSwitch from '../ui/toggle_switch/toggle_switch';
-import ThemeContext from '../../context/theme_context';
 import { RootState } from '../../store/store';
 import DownloadCSV from '../../csv/download_csv';
+import useTheme from '../../hooks/useTheme-hook';
 
 function SearchBar({ handleSubmit, searchValue, setTheme }: SearchBarProps) {
   const posts = useSelector((state: RootState) => state.pokeStore);
@@ -18,7 +18,7 @@ function SearchBar({ handleSubmit, searchValue, setTheme }: SearchBarProps) {
   const { setSearchQueryToLS } = useSearchQuery();
   const [queryState, setQueryState] = useState<string>('');
   const [focus, setFocus] = useState<boolean>(false);
-  const theme = useContext(ThemeContext);
+  const { theme } = useTheme();
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     setQueryState(e.currentTarget.value);
   };
@@ -32,14 +32,14 @@ function SearchBar({ handleSubmit, searchValue, setTheme }: SearchBarProps) {
     setQueryState(searchValue!);
   }, [searchValue]);
   return (
-    <div className={`search-bar-container ${theme}`}>
-      <div className="title-section">
+    <div className={`${styles[`search-bar-container`]} ${styles[`${theme}`]}`}>
+      <div className={styles['title-section']}>
         <h2>Poke Search</h2>
         <ToggleSwitch onChange={handleOnChangeSwitch} />
       </div>
 
-      <form className="search-form" onSubmit={handleSubmit}>
-        <div className="input-wrapper">
+      <form className={styles['search-form']} onSubmit={handleSubmit}>
+        <div className={styles['input-wrapper']}>
           <input
             onFocus={() => setFocus(true)}
             onChange={handleOnChange}
@@ -62,22 +62,27 @@ function SearchBar({ handleSubmit, searchValue, setTheme }: SearchBarProps) {
             />
           ) : null}
         </div>
-        <button className={`submit-btn ${theme}`} type="submit">
+        <button
+          className={`${styles[`submit-btn`]} ${styles[`${theme}`]}`}
+          type="submit"
+        >
           Search
         </button>
       </form>
       {posts.length !== 0 ? (
-        <div className="counter-section">
-          <div className="items-counter">{`${posts.length} items`}</div>
+        <div className={styles['counter-section']}>
+          <div
+            className={styles['items-counter']}
+          >{`${posts.length} items`}</div>
           <button
             onClick={handleClearAll}
-            className={`submit-btn ${theme}`}
+            className={`${styles[`submit-btn`]} ${styles[`${theme}`]}`}
             type="button"
           >
             Clear All
           </button>
           <DownloadCSV
-            className={`submit-btn ${theme}`}
+            className={`${styles[`submit-btn`]} ${styles[`${theme}`]}`}
             data={posts}
             itemsCount={posts.length.toString()}
           />

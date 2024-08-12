@@ -1,14 +1,18 @@
 import psyduckImg from '../../../assets/pics/Psyduck.png';
-import './empty-search-result-style.css';
+import styles from './empty-search-result-style.module.css';
 
 function EmptySearchResult() {
   return (
-    <div className="empty-result-container">
-      <div className="empty-result-text">
+    <div className={styles['empty-result-container']}>
+      <div className={styles['empty-result-text']}>
         <span>Ohh no... there is no such pokemon according your query.</span>
         <span>Try again, please...</span>
       </div>
-      <img className="empty-result-img" src={psyduckImg} alt="psyduch-img" />
+      <img
+        className={styles['empty-result-img']}
+        src={psyduckImg}
+        alt="psyduch-img"
+      />
     </div>
   );
 }

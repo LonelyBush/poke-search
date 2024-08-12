@@ -1,5 +1,5 @@
 import { ChangeEvent } from 'react';
-import './toggle_switch-style.css';
+import styles from './toggle_switch-style.module.css';
 
 function ToggleSwitch({
   onChange,
@@ -7,15 +7,15 @@ function ToggleSwitch({
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }) {
   return (
-    <div className="toggle-switch-container">
-      <label htmlFor="toggle-switch" className="switch">
+    <div className={styles['toggle-switch-container']}>
+      <label htmlFor="toggle-switch" className={styles.switch}>
         <input
           onChange={onChange}
           id="toggle-switch"
           type="checkbox"
-          className="switch-input"
+          className={styles['switch-input']}
         />
-        <span className="slider round" />
+        <span className={`${styles.slider} ${styles.round}`} />
       </label>
     </div>
   );
