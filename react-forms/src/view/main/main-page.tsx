@@ -9,6 +9,7 @@ function MainPage() {
       <h1>React Forms</h1>
       <div className={styles.btnSection}>
         <Button
+          disabled={false}
           onClick={() => {
             navigate('/uncontrolled');
           }}
@@ -17,6 +18,7 @@ function MainPage() {
           Uncontrolled Form
         </Button>
         <Button
+          disabled={false}
           onClick={() => {
             navigate('/hook-form');
           }}

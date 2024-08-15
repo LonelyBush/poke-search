@@ -67,6 +67,7 @@ function UncontrolledForm() {
 
   return (
     <div className={styles.formMainSection}>
+      <h1>Uncontrolled Form</h1>
       <form
         onChange={() => {
           setErrors({});
