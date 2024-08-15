@@ -5,13 +5,16 @@ function Button({
   type,
   onClick,
   children,
+  disabled,
 }: {
+  disabled: boolean;
   type: string;
   onClick: () => void;
   children: ReactNode;
 }) {
   return (
     <button
+      disabled={disabled}
       className={styles.button}
       type={type !== 'button' ? 'submit' : 'button'}
       onClick={onClick}

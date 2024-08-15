@@ -47,7 +47,7 @@ const AutoComplete = forwardRef<
 
   return (
     <div className={styles.autoCompleteWrapper}>
-      <label className={styles.inputWrapper} htmlFor="user-autocomplete">
+      <label className={styles.inputWrapper} htmlFor={props.name}>
         Country:
         <input
           id={props.id}

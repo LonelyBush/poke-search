@@ -5,6 +5,7 @@ import styles from './uncontrolled-form.module.css';
 import AutoComplete from '../../components/auto-complete-input/auto-complete-input';
 import CheckBox from '../../components/ui/checkbox/checkbox';
 import schema from '../../schema/schema';
+import PasswordStrength from '../../components/password-strength-indicator/password-indicator';
 
 function UncontrolledForm() {
   const name = useRef<HTMLInputElement>(null);
@@ -17,6 +18,31 @@ function UncontrolledForm() {
   const TC = useRef<HTMLInputElement>(null);
   const picture = useRef<HTMLInputElement>(null);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const [passStrength, setPassStrength] = useState<number>(0);
+
+  const handleValidationSchema = async (formData) => {
+    try {
+      await schema.validate(formData, { abortEarly: false });
+      setErrors({});
+      return true;
+    } catch (valiErrors) {
+      if (valiErrors instanceof yup.ValidationError) {
+        const newErrors: { [key: string]: string } = {};
+        let strengthCounter = 0;
+        valiErrors.inner.forEach((error) => {
+          if (error.path) {
+            newErrors[error.path] = error.message;
+            if (error.path === 'password') {
+              strengthCounter += 1;
+            }
+          }
+        });
+        setErrors(newErrors);
+        setPassStrength(strengthCounter);
+      }
+      return false;
+    }
+  };
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -32,24 +58,22 @@ function UncontrolledForm() {
       picture: picture.current.files[0],
       tc: TC.current?.checked,
     };
-    try {
-      await schema.validate(formData, { abortEarly: false });
-      setErrors({});
-    } catch (valiErrors) {
-      if (valiErrors instanceof yup.ValidationError) {
-        const newErrors: { [key: string]: string } = {};
-        valiErrors.inner.forEach((error) => {
-          if (error.path) {
-            newErrors[error.path] = error.message;
-          }
-        });
-        setErrors(newErrors);
-      }
+    const isValid = await handleValidationSchema(formData);
+
+    if (isValid) {
+      console.log(formData);
     }
   };
+
   return (
     <div className={styles.formMainSection}>
-      <form onSubmit={handleSubmit} className={styles.formContent}>
+      <form
+        onChange={() => {
+          setErrors({});
+        }}
+        onSubmit={handleSubmit}
+        className={styles.formContent}
+      >
         <label className={styles.inputWrapper} htmlFor="name">
           Name:
           <input
@@ -108,7 +132,7 @@ function UncontrolledForm() {
             <span className={styles.errorMes}>*{errors.email}</span>
           )}
         </label>
-        <label className={styles.inputWrapper} htmlFor="passowrd">
+        <label className={styles.inputWrapper} htmlFor="password">
           Password:
           <input
             ref={password}
@@ -119,6 +143,9 @@ function UncontrolledForm() {
           />
           {errors.password && (
             <span className={styles.errorMes}>*{errors.password}</span>
+          )}
+          {password.current?.value && errors.password && (
+            <PasswordStrength strengthValue={passStrength} />
           )}
         </label>
         <label className={styles.inputWrapper} htmlFor="confirmPassword">
@@ -134,7 +161,7 @@ function UncontrolledForm() {
             <span className={styles.errorMes}>*{errors.confirmPassword}</span>
           )}
         </label>
-        <label className={styles.inputWrapper} htmlFor="userPicture">
+        <label className={styles.inputWrapper} htmlFor="picture">
           Upload picture:
           <input ref={picture} id="picture" name="picture" type="file" />
           {errors.picture && (
@@ -150,7 +177,11 @@ function UncontrolledForm() {
           errors={errors}
         />
 
-        <Button type="submit" onClick={() => {}}>
+        <Button
+          disabled={Object.keys(errors).length > 0}
+          type="submit"
+          onClick={() => {}}
+        >
           Submit Form
         </Button>
       </form>

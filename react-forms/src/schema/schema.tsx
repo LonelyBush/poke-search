@@ -27,14 +27,14 @@ const schema = yup.object().shape({
   password: yup
     .string()
     .required()
-    .min(6)
-    .matches(/.*\d.*/, 'Should contain at least 1 number')
-    .matches(/.*[A-Z].*/, 'Should contain at least 1 uppercase letter')
-    .matches(/.*[a-z].*/, 'Should contain at least 1 lowercase letter')
+    .matches(/.*\d.*/, 'Password should contain at least 1 number')
+    .matches(/.*[A-Z].*/, 'Password should contain at least 1 uppercase letter')
+    .matches(/.*[a-z].*/, 'Password should contain at least 1 lowercase letter')
     .matches(
       /.*[!@#$%^&*(),.?":{}|<>].*/,
-      'Should contain at least 1 special charecters (!,@,#,$,% ..etc)',
-    ),
+      'Password should contain at least 1 special charecters (!,@,#,$,% ..etc)',
+    )
+    .min(6),
   confirmPassword: yup
     .string()
     .oneOf([yup.ref('password')], 'Password must match'),
@@ -42,13 +42,15 @@ const schema = yup.object().shape({
     .mixed()
     .required('Image upload is required')
     .test('fileSize', 'The image size must not exceed 2 mb', (value) => {
-      return value && value.size <= 2048;
+      return value && value.size <= 2048000;
     })
     .test(
       'fileFormat',
       'The file must be in the following format: .png .jpg',
       (value) => {
-        return value && ['image/jpg', 'image/png'].includes(value.type);
+        return (
+          value && ['image/jpeg', 'image/png', 'image/jpg'].includes(value.type)
+        );
       },
     ),
   tc: yup
