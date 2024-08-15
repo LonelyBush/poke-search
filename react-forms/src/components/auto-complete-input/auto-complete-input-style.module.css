@@ -46,6 +46,9 @@
     box-shadow: inset 0 1px 4px 0 rgb(119 122 175 / 30%);
     overflow: hidden;
     transition: all 100ms ease-in-out;
+    height: 9rem;
+    max-width: 20rem;
+    overflow-y: scroll;
 }
 
 .suggestionsSection.hide {
@@ -62,4 +65,8 @@
 .suggestionsChild:hover{
     background-color: #d1d1d1;
     color: #fff;
+}
+
+.errorMes{
+    color: red;
 }

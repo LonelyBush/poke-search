@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
-
-const preloadedState = ['1', '2'];
+import postsReducer from '../slices/countries-slice';
 
 const store = configureStore({
-  preloadedState,
-  reducer: {},
+  reducer: {
+    countryList: postsReducer,
+  },
 });
 
 setupListeners(store.dispatch);

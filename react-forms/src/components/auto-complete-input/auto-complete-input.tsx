@@ -1,18 +1,40 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import { ChangeEvent, useRef, useState } from 'react';
+import {
+  ChangeEvent,
+  forwardRef,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from 'react';
+import { useSelector } from 'react-redux';
 import styles from './auto-complete-input-style.module.css';
+import { RootState } from '../../store/store';
 
-const data = ['america', 'belarus', 'russia'];
+interface AutocompleteHandle {
+  value: string;
+}
 
-function AutoComplete() {
+const AutoComplete = forwardRef<
+  AutocompleteHandle,
+  { name: string; id: string; errors: { [key: string]: string } }
+>((props, ref) => {
+  const data = useSelector((state: RootState) => state.countryList);
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [hideSuggestions, setHideSuggestions] = useState<boolean>(true);
   const inputValue = useRef<HTMLInputElement>(null);
 
+  useImperativeHandle(ref, () => ({
+    value: inputValue.current?.value || '',
+  }));
+
   const suggestionsHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setHideSuggestions(false);
     setSuggestions(
-      data.filter((suggestion) => suggestion.startsWith(e.currentTarget.value)),
+      data.filter((suggestion) =>
+        suggestion.startsWith(
+          e.currentTarget.value.charAt(0).toUpperCase() +
+            e.currentTarget.value.slice(1),
+        ),
+      ),
     );
   };
 
@@ -28,12 +50,23 @@ function AutoComplete() {
       <label className={styles.inputWrapper} htmlFor="user-autocomplete">
         Country:
         <input
-          name="user-autocomplete"
+          id={props.id}
+          name={props.name}
           type="text"
           className={styles.inputTextStyle}
           onChange={suggestionsHandler}
           ref={inputValue}
+          onKeyUp={() => {
+            if (suggestions.length === 0) {
+              setHideSuggestions(true);
+            } else {
+              setHideSuggestions(false);
+            }
+          }}
         />
+        {props.errors.country && (
+          <span className={styles.errorMes}>*{props.errors.country}</span>
+        )}
       </label>
       <ul
         className={`${styles.suggestionsSection} ${hideSuggestions ? styles.hide : ''}`}
@@ -54,6 +87,6 @@ function AutoComplete() {
       </ul>
     </div>
   );
-}
+});
 
 export default AutoComplete;

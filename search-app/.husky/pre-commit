@@ -1,3 +1,0 @@
-cd search-app
-npm run lint:fix
-npm run lint
