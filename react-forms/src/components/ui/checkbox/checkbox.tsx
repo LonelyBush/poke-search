@@ -1,9 +1,18 @@
+/* eslint-disable react/require-default-props */
 import { forwardRef } from 'react';
+import { ChangeHandler } from 'react-hook-form';
 import styles from './checkbox-style.module.css';
+import error from '../../../index.module.css';
 
 const CheckBox = forwardRef<
   HTMLInputElement,
-  { name: string; label: string; id: string; errors: { [key: string]: string } }
+  {
+    onChange?: ChangeHandler;
+    name: string;
+    label: string;
+    id: string;
+    error: string;
+  }
 >((props, ref) => {
   return (
     <div className={styles['check-box-container']}>
@@ -14,13 +23,13 @@ const CheckBox = forwardRef<
           name={props.name}
           type="checkbox"
           className={styles.checkbox}
+          onChange={props.onChange}
         />
         <span className={styles.checkmark} />
         {props.label}
       </label>
-      {props.errors.tc && (
-        <span className={styles.errorMes}>*{props.errors.tc}</span>
-      )}
+
+      <span className={error.errorMes}>{`${props.error}`}</span>
     </div>
   );
 });

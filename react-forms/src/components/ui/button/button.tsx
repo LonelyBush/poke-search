@@ -1,3 +1,4 @@
+/* eslint-disable react/require-default-props */
 import { ReactNode } from 'react';
 import styles from './button-style.module.css';
 
@@ -9,7 +10,7 @@ function Button({
 }: {
   disabled: boolean;
   type: string;
-  onClick: () => void;
+  onClick?: () => void;
   children: ReactNode;
 }) {
   return (

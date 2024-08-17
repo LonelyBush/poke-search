@@ -4,6 +4,7 @@ import countryList from '../slices/countries-data';
 const schema = yup.object().shape({
   name: yup
     .string()
+    .matches(/^[^\d]*$/, 'Remove numbers from your name')
     .matches(/\b[A-Z][a-z]*\b/, 'First letter must be uppercased')
     .required('Name is required'),
   email: yup
@@ -22,11 +23,12 @@ const schema = yup.object().shape({
     .required('Country is required'),
   age: yup
     .number()
+    .typeError('Age must be a number')
     .min(18, 'You must be at least 18 years old')
     .required('Age is required'),
   password: yup
     .string()
-    .required()
+    .required('Password is required')
     .matches(/.*\d.*/, 'Password should contain at least 1 number')
     .matches(/.*[A-Z].*/, 'Password should contain at least 1 uppercase letter')
     .matches(/.*[a-z].*/, 'Password should contain at least 1 lowercase letter')
@@ -39,19 +41,26 @@ const schema = yup.object().shape({
     .string()
     .oneOf([yup.ref('password')], 'Password must match'),
   picture: yup
-    .mixed()
+    .mixed<FileList>()
     .required('Image upload is required')
-    .test('fileSize', 'The image size must not exceed 2 mb', (value) => {
-      return value && value.size <= 2048000;
-    })
     .test(
       'fileFormat',
       'The file must be in the following format: .png .jpg',
       (value) => {
         return (
-          value && ['image/jpeg', 'image/png', 'image/jpg'].includes(value.type)
+          value.length === 0 ||
+          Array.from(value).every(
+            (file) => file.type === 'image/jpeg' || file.type === 'image/png',
+          )
         );
       },
+    )
+    .test(
+      'fileSize',
+      'The image size must not exceed 2 mb',
+      (value) =>
+        value.length === 0 ||
+        Array.from(value).every((file) => file.size <= 2_000_000),
     ),
   tc: yup
     .boolean()

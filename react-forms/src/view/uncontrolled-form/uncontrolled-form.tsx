@@ -1,11 +1,12 @@
 import { FormEvent, useRef, useState } from 'react';
 import * as yup from 'yup';
 import Button from '../../components/ui/button/button';
-import styles from './uncontrolled-form.module.css';
+import styles from '../../index.module.css';
 import AutoComplete from '../../components/auto-complete-input/auto-complete-input';
 import CheckBox from '../../components/ui/checkbox/checkbox';
 import schema from '../../schema/schema';
 import PasswordStrength from '../../components/password-strength-indicator/password-indicator';
+import FormData from '../../Interface/interfaces';
 
 function UncontrolledForm() {
   const name = useRef<HTMLInputElement>(null);
@@ -20,7 +21,7 @@ function UncontrolledForm() {
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [passStrength, setPassStrength] = useState<number>(0);
 
-  const handleValidationSchema = async (formData) => {
+  const handleValidationSchema = async (formData: FormData) => {
     try {
       await schema.validate(formData, { abortEarly: false });
       setErrors({});
@@ -55,7 +56,7 @@ function UncontrolledForm() {
       country: country.current?.value,
       password: password.current?.value,
       confirmPassword: confirmPassword.current?.value,
-      picture: picture.current.files[0],
+      picture: picture.current.files,
       tc: TC.current?.checked,
     };
     const isValid = await handleValidationSchema(formData);
@@ -64,17 +65,10 @@ function UncontrolledForm() {
       console.log(formData);
     }
   };
-
   return (
     <div className={styles.formMainSection}>
       <h1>Uncontrolled Form</h1>
-      <form
-        onChange={() => {
-          setErrors({});
-        }}
-        onSubmit={handleSubmit}
-        className={styles.formContent}
-      >
+      <form onSubmit={handleSubmit} className={styles.formContent}>
         <label className={styles.inputWrapper} htmlFor="name">
           Name:
           <input
@@ -85,7 +79,7 @@ function UncontrolledForm() {
             type="text"
           />
           {errors.name && (
-            <span className={styles.errorMes}>*{errors.name}</span>
+            <span className={styles.errorMes}>{errors.name}</span>
           )}
         </label>
         <label className={styles.inputWrapper} htmlFor="age">
@@ -97,7 +91,7 @@ function UncontrolledForm() {
             id="age"
             type="text"
           />
-          {errors.age && <span className={styles.errorMes}>*{errors.age}</span>}
+          {errors.age && <span className={styles.errorMes}>{errors.age}</span>}
         </label>
         <label className={styles.inputWrapper} htmlFor="gender">
           Gender:
@@ -111,14 +105,14 @@ function UncontrolledForm() {
             <option>Female</option>
           </select>
           {errors.gender && (
-            <span className={styles.errorMes}>*{errors.gender}</span>
+            <span className={styles.errorMes}>{errors.gender}</span>
           )}
         </label>
         <AutoComplete
           name="country"
           id="country"
           ref={country}
-          errors={errors}
+          errors={errors.country}
         />
         <label className={styles.inputWrapper} htmlFor="email">
           Email:
@@ -130,7 +124,7 @@ function UncontrolledForm() {
             type="text"
           />
           {errors.email && (
-            <span className={styles.errorMes}>*{errors.email}</span>
+            <span className={styles.errorMes}>{errors.email}</span>
           )}
         </label>
         <label className={styles.inputWrapper} htmlFor="password">
@@ -143,7 +137,7 @@ function UncontrolledForm() {
             type="password"
           />
           {errors.password && (
-            <span className={styles.errorMes}>*{errors.password}</span>
+            <span className={styles.errorMes}>{errors.password}</span>
           )}
           {password.current?.value && errors.password && (
             <PasswordStrength strengthValue={passStrength} />
@@ -159,14 +153,14 @@ function UncontrolledForm() {
             type="password"
           />
           {errors.confirmPassword && (
-            <span className={styles.errorMes}>*{errors.confirmPassword}</span>
+            <span className={styles.errorMes}>{errors.confirmPassword}</span>
           )}
         </label>
         <label className={styles.inputWrapper} htmlFor="picture">
           Upload picture:
           <input ref={picture} id="picture" name="picture" type="file" />
           {errors.picture && (
-            <span className={styles.errorMes}>*{errors.picture}</span>
+            <span className={styles.errorMes}>{errors.picture}</span>
           )}
         </label>
 
@@ -175,14 +169,10 @@ function UncontrolledForm() {
           id="tc"
           name="tc"
           label="Accept Terms and Conditions agreement"
-          errors={errors}
+          error={errors.tc === undefined ? '' : errors.tc}
         />
 
-        <Button
-          disabled={Object.keys(errors).length > 0}
-          type="submit"
-          onClick={() => {}}
-        >
+        <Button disabled={false} type="submit" onClick={() => {}}>
           Submit Form
         </Button>
       </form>
