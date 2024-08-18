@@ -1,16 +1,21 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import schema from '../../schema/schema';
 import styles from '../../index.module.css';
 import Button from '../../components/ui/button/button';
 import CheckBox from '../../components/ui/checkbox/checkbox';
 import AutoComplete from '../../components/auto-complete-input/auto-complete-input';
 import PasswordStrength from '../../components/password-strength-indicator/password-indicator';
+import toBase64 from '../../utils/to-base-64';
+import { addNewFormValues } from '../../slices/forms-slice';
 
 type FormData = yup.InferType<typeof schema>;
 
 function HookForm() {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -21,8 +26,18 @@ function HookForm() {
     mode: 'onChange',
     resolver: yupResolver(schema),
   });
-  const onSubmit: SubmitHandler<FormData> = (data) => {
-    console.log(data);
+  const dispatch = useDispatch();
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
+    if (data.picture) {
+      const picture64 = await toBase64(data.picture[0]);
+      const submitToStore = {
+        ...data,
+        picture: picture64,
+        formType: 'Hook-Form',
+      };
+      dispatch(addNewFormValues(submitToStore));
+      navigate('/main');
+    }
   };
 
   return (

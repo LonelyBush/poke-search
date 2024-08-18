@@ -1,0 +1,55 @@
+.formsListSection {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+}
+.formsListSection > h2 {
+    margin: 2rem;
+    text-align: center;
+}
+
+.formListWrapper {
+    display: flex;
+    padding: 1.4rem;
+    width: fit-content;
+    border: 0.1rem solid rgb(204, 201, 201);
+    background-color: #FFFFFF;
+    text-align: start;
+    border-radius: 0.5rem;
+    gap: 1rem;
+    width: 45rem;
+
+}
+
+.mainTextContent {    
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 1.5rem;
+}
+
+.emptyStore{
+    text-align: center;
+    font-size: 3rem;
+    line-height: 10rem;
+}
+
+.formImageContainer {
+    width:15rem;
+    height: 15rem;
+    aspect-ratio: 1 / 1;
+    border-radius: 1rem;
+    border: 0.1rem solid rgb(173, 171, 171);
+}
+
+.formListWrapper.latest {
+    animation: latest 7s linear 0s;
+    animation-iteration-count: 1;
+}
+
+@keyframes latest {
+
+    from {  box-shadow: rgba(1, 247, 22, 0.76) 0px 5px 15px; }
+    to {  box-shadow: none }
+  }

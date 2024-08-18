@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import Button from '../../components/ui/button/button';
 import styles from './main-page-style.module.css';
+import FormsList from '../../components/forms-list/forms-list';
 
 function MainPage() {
   const navigate = useNavigate();
@@ -27,6 +28,7 @@ function MainPage() {
           React hook Form
         </Button>
       </div>
+      <FormsList />
     </div>
   );
 }

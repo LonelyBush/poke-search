@@ -1,5 +1,7 @@
 import { FormEvent, useRef, useState } from 'react';
 import * as yup from 'yup';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import Button from '../../components/ui/button/button';
 import styles from '../../index.module.css';
 import AutoComplete from '../../components/auto-complete-input/auto-complete-input';
@@ -7,6 +9,8 @@ import CheckBox from '../../components/ui/checkbox/checkbox';
 import schema from '../../schema/schema';
 import PasswordStrength from '../../components/password-strength-indicator/password-indicator';
 import FormData from '../../Interface/interfaces';
+import toBase64 from '../../utils/to-base-64';
+import { addNewFormValues } from '../../slices/forms-slice';
 
 function UncontrolledForm() {
   const name = useRef<HTMLInputElement>(null);
@@ -19,6 +23,8 @@ function UncontrolledForm() {
   const TC = useRef<HTMLInputElement>(null);
   const picture = useRef<HTMLInputElement>(null);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleValidationSchema = async (formData: FormData) => {
     try {
@@ -56,7 +62,16 @@ function UncontrolledForm() {
     const isValid = await handleValidationSchema(formData);
 
     if (isValid) {
-      console.log(formData);
+      if (formData.picture) {
+        const picture64 = await toBase64(formData.picture[0]);
+        const submitToStore = {
+          ...formData,
+          picture: picture64,
+          formType: 'Uncontrolled Form',
+        };
+        dispatch(addNewFormValues(submitToStore));
+        navigate('/main');
+      }
     }
   };
   return (
