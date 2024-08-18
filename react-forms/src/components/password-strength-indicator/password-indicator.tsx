@@ -26,7 +26,10 @@ function PasswordStrength({
         indicator = <div className={styles.medium} />;
         label = 'medium';
       }
-      if (/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).+$/.test(passwordValue)) {
+      if (
+        passwordValue.length > 8 &&
+        /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).+$/.test(passwordValue)
+      ) {
         indicator = <div className={styles.strong} />;
         label = 'strong';
       }
