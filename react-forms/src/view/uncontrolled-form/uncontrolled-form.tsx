@@ -19,7 +19,6 @@ function UncontrolledForm() {
   const TC = useRef<HTMLInputElement>(null);
   const picture = useRef<HTMLInputElement>(null);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
-  const [passStrength, setPassStrength] = useState<number>(0);
 
   const handleValidationSchema = async (formData: FormData) => {
     try {
@@ -29,17 +28,12 @@ function UncontrolledForm() {
     } catch (valiErrors) {
       if (valiErrors instanceof yup.ValidationError) {
         const newErrors: { [key: string]: string } = {};
-        let strengthCounter = 0;
         valiErrors.inner.forEach((error) => {
           if (error.path) {
             newErrors[error.path] = error.message;
-            if (error.path === 'password') {
-              strengthCounter += 1;
-            }
           }
         });
         setErrors(newErrors);
-        setPassStrength(strengthCounter);
       }
       return false;
     }
@@ -78,9 +72,7 @@ function UncontrolledForm() {
             name="name"
             type="text"
           />
-          {errors.name && (
-            <span className={styles.errorMes}>{errors.name}</span>
-          )}
+          <span className={styles.errorMes}>{errors.name}</span>
         </label>
         <label className={styles.inputWrapper} htmlFor="age">
           Age:
@@ -91,7 +83,7 @@ function UncontrolledForm() {
             id="age"
             type="text"
           />
-          {errors.age && <span className={styles.errorMes}>{errors.age}</span>}
+          <span className={styles.errorMes}>{errors.age}</span>
         </label>
         <label className={styles.inputWrapper} htmlFor="gender">
           Gender:
@@ -104,9 +96,7 @@ function UncontrolledForm() {
             <option>Male</option>
             <option>Female</option>
           </select>
-          {errors.gender && (
-            <span className={styles.errorMes}>{errors.gender}</span>
-          )}
+          <span className={styles.errorMes}>{errors.gender}</span>
         </label>
         <AutoComplete
           name="country"
@@ -123,9 +113,7 @@ function UncontrolledForm() {
             id="email"
             type="text"
           />
-          {errors.email && (
-            <span className={styles.errorMes}>{errors.email}</span>
-          )}
+          <span className={styles.errorMes}>{errors.email}</span>
         </label>
         <label className={styles.inputWrapper} htmlFor="password">
           Password:
@@ -136,12 +124,8 @@ function UncontrolledForm() {
             id="password"
             type="password"
           />
-          {errors.password && (
-            <span className={styles.errorMes}>{errors.password}</span>
-          )}
-          {password.current?.value && errors.password && (
-            <PasswordStrength strengthValue={passStrength} />
-          )}
+          <PasswordStrength passwordValue={password.current?.value} />
+          <span className={styles.errorMes}>{errors.password}</span>
         </label>
         <label className={styles.inputWrapper} htmlFor="confirmPassword">
           Confirm Password:
@@ -152,16 +136,18 @@ function UncontrolledForm() {
             id="confirmPassword"
             type="password"
           />
-          {errors.confirmPassword && (
-            <span className={styles.errorMes}>{errors.confirmPassword}</span>
-          )}
+          <span className={styles.errorMes}>{errors.confirmPassword}</span>
         </label>
         <label className={styles.inputWrapper} htmlFor="picture">
           Upload picture:
-          <input ref={picture} id="picture" name="picture" type="file" />
-          {errors.picture && (
-            <span className={styles.errorMes}>{errors.picture}</span>
-          )}
+          <input
+            ref={picture}
+            id="picture"
+            name="picture"
+            type="file"
+            required
+          />
+          <span className={styles.errorMes}>{errors.picture}</span>
         </label>
 
         <CheckBox

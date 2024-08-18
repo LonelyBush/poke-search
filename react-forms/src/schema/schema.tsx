@@ -4,6 +4,7 @@ import countryList from '../slices/countries-data';
 const schema = yup.object().shape({
   name: yup
     .string()
+    .matches(/^[a-zA-Z0-9]*$/, 'Remove special charecters from name')
     .matches(/^[^\d]*$/, 'Remove numbers from your name')
     .matches(/\b[A-Z][a-z]*\b/, 'First letter must be uppercased')
     .required('Name is required'),
@@ -29,12 +30,12 @@ const schema = yup.object().shape({
   password: yup
     .string()
     .required('Password is required')
-    .matches(/.*\d.*/, 'Password should contain at least 1 number')
-    .matches(/.*[A-Z].*/, 'Password should contain at least 1 uppercase letter')
-    .matches(/.*[a-z].*/, 'Password should contain at least 1 lowercase letter')
+    .matches(/.*\d.*/, 'Password should contain 1 number')
+    .matches(/.*[A-Z].*/, 'Password should contain 1 uppercase letter [A-Z]')
+    .matches(/.*[a-z].*/, 'Password should contain 1 lowercase letter [a-z]')
     .matches(
       /.*[!@#$%^&*(),.?":{}|<>].*/,
-      'Password should contain at least 1 special charecters (!,@,#,$,% ..etc)',
+      'Password should contain 1 special charecters [!,@,#,$,% ..etc]',
     )
     .min(6),
   confirmPassword: yup
@@ -42,25 +43,21 @@ const schema = yup.object().shape({
     .oneOf([yup.ref('password')], 'Password must match'),
   picture: yup
     .mixed<FileList>()
-    .required('Image upload is required')
+    .test('fileUpload', 'File upload is required', (value) => {
+      const val = value!;
+      return val.length > 0;
+    })
     .test(
       'fileFormat',
       'The file must be in the following format: .png .jpg',
       (value) => {
-        return (
-          value.length === 0 ||
-          Array.from(value).every(
-            (file) => file.type === 'image/jpeg' || file.type === 'image/png',
-          )
+        return Array.from(value!).every(
+          (file) => file.type === 'image/jpeg' || file.type === 'image/png',
         );
       },
     )
-    .test(
-      'fileSize',
-      'The image size must not exceed 2 mb',
-      (value) =>
-        value.length === 0 ||
-        Array.from(value).every((file) => file.size <= 2_000_000),
+    .test('fileSize', 'The image size must not exceed 2 mb', (value) =>
+      Array.from(value!).every((file) => file.size <= 2_000_000),
     ),
   tc: yup
     .boolean()

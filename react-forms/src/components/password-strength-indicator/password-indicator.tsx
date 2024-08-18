@@ -1,19 +1,39 @@
 import styles from './password-strength-style.module.css';
 
-function PasswordStrength({ strengthValue }: { strengthValue: number }) {
+function PasswordStrength({
+  passwordValue,
+}: {
+  passwordValue: string | undefined;
+}) {
   let indicator;
   let label;
-  if (strengthValue <= 6 && strengthValue >= 4) {
-    indicator = <div className={styles.weak} />;
-    label = 'Your password is weak!';
+  if (passwordValue === undefined || passwordValue === '') {
+    label = 'Password strength';
   }
-  if (strengthValue <= 3) {
-    indicator = <div className={styles.medium} />;
-    label = 'Your password is medium!';
-  }
-  if (strengthValue === 0) {
-    indicator = <div className={styles.strong} />;
-    label = 'Your password is strong!';
+  if (passwordValue !== undefined && passwordValue.length > 0) {
+    if (passwordValue.length >= 6) {
+      if (
+        /.*\d.*/.test(passwordValue) ||
+        /^(?=.*[A-Z])(?=.*[a-z]).+$/.test(passwordValue) ||
+        /^(?=.*[a-z]).+$/.test(passwordValue) ||
+        /^(?=.*[A-Z]).+$/.test(passwordValue) ||
+        /^(?=.*[\W_]).+$/.test(passwordValue)
+      ) {
+        indicator = <div className={styles.weak} />;
+        label = 'weak';
+      }
+      if (/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).+$/.test(passwordValue)) {
+        indicator = <div className={styles.medium} />;
+        label = 'medium';
+      }
+      if (/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).+$/.test(passwordValue)) {
+        indicator = <div className={styles.strong} />;
+        label = 'strong';
+      }
+    } else {
+      indicator = <div className={styles.weak} />;
+      label = 'weak';
+    }
   }
 
   return (

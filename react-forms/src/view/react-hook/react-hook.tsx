@@ -6,6 +6,7 @@ import styles from '../../index.module.css';
 import Button from '../../components/ui/button/button';
 import CheckBox from '../../components/ui/checkbox/checkbox';
 import AutoComplete from '../../components/auto-complete-input/auto-complete-input';
+import PasswordStrength from '../../components/password-strength-indicator/password-indicator';
 
 type FormData = yup.InferType<typeof schema>;
 
@@ -13,9 +14,10 @@ function HookForm() {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
-  } = useForm<FormData>({
-    defaultValues: { tc: false },
+  } = useForm({
+    defaultValues: { tc: false, password: '' },
     mode: 'onChange',
     resolver: yupResolver(schema),
   });
@@ -73,6 +75,7 @@ function HookForm() {
             id="password"
             type="password"
           />
+          <PasswordStrength passwordValue={watch().password} />
           <span className={styles.errorMes}>{errors.password?.message}</span>
         </label>
         <label className={styles.inputWrapper} htmlFor="confirmPassword">
@@ -84,11 +87,9 @@ function HookForm() {
             id="confirmPassword"
             type="password"
           />
-          {errors.confirmPassword && (
-            <span className={styles.errorMes}>
-              {errors.confirmPassword?.message}
-            </span>
-          )}
+          <span className={styles.errorMes}>
+            {errors.confirmPassword?.message}
+          </span>
         </label>
         <label className={styles.inputWrapper} htmlFor="picture">
           Upload picture:
@@ -97,6 +98,7 @@ function HookForm() {
             id="picture"
             name="picture"
             type="file"
+            required
           />
           <span className={styles.errorMes}>{errors.picture?.message}</span>
         </label>
@@ -109,11 +111,9 @@ function HookForm() {
         />
 
         <Button
-          disabled={false}
+          disabled={Object.keys(errors).length > 0}
           type="submit"
-          onClick={() => {
-            console.log(errors);
-          }}
+          onClick={() => {}}
         >
           Submit Form
         </Button>
