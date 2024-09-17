@@ -160,7 +160,6 @@ function UncontrolledForm() {
             id="picture"
             name="picture"
             type="file"
-            required
           />
           <span className={styles.errorMes}>{errors.picture}</span>
         </label>

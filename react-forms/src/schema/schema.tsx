@@ -43,6 +43,7 @@ const schema = yup.object().shape({
     .oneOf([yup.ref('password')], 'Password must match'),
   picture: yup
     .mixed<FileList>()
+    .required('')
     .test('fileUpload', 'File upload is required', (value) => {
       const val = value!;
       return val.length > 0;
