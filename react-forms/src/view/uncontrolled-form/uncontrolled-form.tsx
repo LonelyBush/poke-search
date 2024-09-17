@@ -155,12 +155,7 @@ function UncontrolledForm() {
         </label>
         <label className={styles.inputWrapper} htmlFor="picture">
           Upload picture:
-          <input
-            ref={picture}
-            id="picture"
-            name="picture"
-            type="file"
-          />
+          <input ref={picture} id="picture" name="picture" type="file" />
           <span className={styles.errorMes}>{errors.picture}</span>
         </label>
 
