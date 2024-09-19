@@ -1,24 +1,23 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable react/button-has-type */
 import { useDispatch, useSelector } from 'react-redux';
-import { ChangeEvent, useEffect, useState } from 'react';
-import { removeAllPokemons } from '../../redux_slice/redux_slice';
-import { SearchBarProps } from '../../interfaces/props_interfaces';
+import { ChangeEvent, useState } from 'react';
+import { Form, useParams } from '@remix-run/react';
+import { removeAllPokemons } from '../../lib/redux_slice/redux_slice';
 import styles from './search_bar-style.module.css';
 import CloseBtn from '../ui/close_btn/close_btn';
-import useSearchQuery from '../../hooks/useSearchQuery-hook';
 import ToggleSwitch from '../ui/toggle_switch/toggle_switch';
-import { RootState } from '../../store/store';
+import { RootState } from '../../lib/store/store';
 import DownloadCSV from '../../csv/download_csv';
 import useTheme from '../../hooks/useTheme-hook';
 
-function SearchBar({ handleSubmit, searchValue, setTheme }: SearchBarProps) {
+function SearchBar() {
+  const { theme, setTheme } = useTheme();
+  const { pageNum } = useParams();
   const posts = useSelector((state: RootState) => state.pokeStore);
   const dispatch = useDispatch();
-  const { setSearchQueryToLS } = useSearchQuery();
   const [queryState, setQueryState] = useState<string>('');
   const [focus, setFocus] = useState<boolean>(false);
-  const { theme } = useTheme();
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     setQueryState(e.currentTarget.value);
   };
@@ -28,9 +27,6 @@ function SearchBar({ handleSubmit, searchValue, setTheme }: SearchBarProps) {
   const handleClearAll = () => {
     dispatch(removeAllPokemons());
   };
-  useEffect(() => {
-    setQueryState(searchValue!);
-  }, [searchValue]);
   return (
     <div className={`${styles[`search-bar-container`]} ${styles[`${theme}`]}`}>
       <div className={styles['title-section']}>
@@ -38,14 +34,18 @@ function SearchBar({ handleSubmit, searchValue, setTheme }: SearchBarProps) {
         <ToggleSwitch onChange={handleOnChangeSwitch} />
       </div>
 
-      <form className={styles['search-form']} onSubmit={handleSubmit}>
+      <Form
+        action={`/page/${pageNum}`}
+        method="get"
+        className={styles['search-form']}
+      >
         <div className={styles['input-wrapper']}>
           <input
             onFocus={() => setFocus(true)}
             onChange={handleOnChange}
             data-focused={focus.toString()}
             value={queryState}
-            name="search-input"
+            name="query"
             type="text"
             pattern="^\S+$"
           />
@@ -57,7 +57,6 @@ function SearchBar({ handleSubmit, searchValue, setTheme }: SearchBarProps) {
               onClick={() => {
                 setFocus(false);
                 setQueryState('');
-                setSearchQueryToLS('');
               }}
             />
           ) : null}
@@ -68,7 +67,7 @@ function SearchBar({ handleSubmit, searchValue, setTheme }: SearchBarProps) {
         >
           Search
         </button>
-      </form>
+      </Form>
       {posts.length !== 0 ? (
         <div className={styles['counter-section']}>
           <div

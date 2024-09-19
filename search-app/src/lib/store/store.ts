@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
-import { pokemonApi } from '../api/getPokemons';
+import { pokemonApi } from '../../api/getPokemons';
 import postsReducer from '../redux_slice/redux_slice';
 
 const store = configureStore({

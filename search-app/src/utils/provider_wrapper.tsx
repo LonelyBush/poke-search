@@ -1,6 +1,6 @@
 import { Provider } from 'react-redux';
 import { ReactNode } from 'react';
-import store from '../store/store';
+import store from '../lib/store/store';
 import { ThemeProvider } from '../context/theme_context';
 
 function ProviderWrapper({ children }: { children: ReactNode }) {

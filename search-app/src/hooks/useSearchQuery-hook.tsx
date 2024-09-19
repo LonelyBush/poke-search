@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 function useSearchQuery() {
   const [searchQueryFromLS, setSearchQuery] = useState(() => {
-    const queryFromLS = localStorage.getItem('search-value');
+    const queryFromLS = window.localStorage.getItem('search-value');
     return queryFromLS !== null ? queryFromLS : '';
   });
 
@@ -10,7 +10,7 @@ function useSearchQuery() {
     localStorage.setItem('search-value', query);
   };
   useEffect(() => {
-    const searchQueryLS = localStorage.getItem('search-value');
+    const searchQueryLS = window.localStorage.getItem('search-value');
     if (searchQueryLS !== null) {
       setSearchQuery(searchQueryLS);
     }

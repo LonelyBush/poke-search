@@ -7,14 +7,11 @@ import {
   RouterProvider,
 } from 'react-router-dom';
 import NotFoundPage from './not-found-page';
-import SearchPage from '../search-page/search-page';
 
 describe('NotFoundPage', () => {
   it('Should render correctly', () => {
     const router = createMemoryRouter(
-      createRoutesFromElements(
-        <Route errorElement={<NotFoundPage />} element={<SearchPage />} />,
-      ),
+      createRoutesFromElements(<Route errorElement={<NotFoundPage />} />),
       {
         initialEntries: ['/events/123'],
       },

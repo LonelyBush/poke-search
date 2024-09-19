@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import PayloadInterface from '../interfaces/payload_interface';
+import PayloadInterface from '../../interfaces/payload_interface';
 
 const initialState: PayloadInterface[] = [];
 

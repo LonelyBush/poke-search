@@ -1,16 +1,18 @@
-import { NavLink } from 'react-router-dom';
-import { PaginationProps } from '../../interfaces/props_interfaces';
+import { NavLink, useLoaderData, useSearchParams } from '@remix-run/react';
 import styles from './pagination-items-style.module.css';
 import useTheme from '../../hooks/useTheme-hook';
+import { LoaderResponse } from '../../interfaces/api_interfaces';
 
-function Pagination({
-  allResults,
-  postPerPage,
-  handlePageChange,
-}: PaginationProps) {
+// resultsLength === undefined ? 0 : resultsLength
+
+function Pagination() {
+  const { resultsLength } = useLoaderData<LoaderResponse>();
+  const [searchParams] = useSearchParams();
   const { theme } = useTheme();
+  const postPerPage = 20;
+  const totalResultsLength = resultsLength || 0;
   const pages = [];
-  for (let i = 1; i <= Math.ceil(allResults / postPerPage); i += 1) {
+  for (let i = 1; i <= Math.ceil(totalResultsLength / postPerPage); i += 1) {
     pages.push(i);
   }
   return (
@@ -26,9 +28,8 @@ function Pagination({
                 ? `${styles[`pagination-button`]} ${styles[`${theme}`]} ${styles.active}`
                 : `${styles[`pagination-button`]} ${styles[`${theme}`]}`
             }
-            to={`/search/${elem}`}
+            to={`/page/${elem}?${searchParams}`}
             key={elem}
-            onClick={() => handlePageChange(elem)}
             type="button"
           >
             {elem}

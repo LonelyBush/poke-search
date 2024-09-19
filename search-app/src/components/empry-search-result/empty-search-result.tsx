@@ -1,4 +1,4 @@
-import psyduckImg from '../../../assets/pics/Psyduck.png';
+import psyduckImg from '../../assets/pics/Psyduck.png';
 import styles from './empty-search-result-style.module.css';
 
 function EmptySearchResult() {

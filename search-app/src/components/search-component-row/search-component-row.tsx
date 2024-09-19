@@ -1,19 +1,19 @@
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { ChangeEvent, useEffect, useState } from 'react';
-import { addPokemon, removePokemon } from '../../redux_slice/redux_slice';
+import { addPokemon, removePokemon } from '../../lib/redux_slice/redux_slice';
 import { SearchRowComponentProps } from '../../interfaces/props_interfaces';
 import styles from './search-component-row-style.module.css';
-import pokeballStatic from '../../../assets/pics/pokeball.png';
+import pokeballStatic from '../../assets/pics/pokeball.png';
 import { useGetPokemonByNameQuery } from '../../api/getPokemons';
 import CheckBox from '../ui/check_box/check_box';
-import { RootState } from '../../store/store';
+import { RootState } from '../../lib/store/store';
 import useTheme from '../../hooks/useTheme-hook';
 
 function SearchComponentRow({ name, id }: SearchRowComponentProps) {
   const store = useSelector((state: RootState) => state.pokeStore);
   const dispatch = useDispatch();
-  const { data, isLoading } = useGetPokemonByNameQuery(name);
+  const { data, isLoading } = useGetPokemonByNameQuery(name || '');
   const [checked, setChecked] = useState<boolean>(false);
   const HandleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     setChecked(!checked);
@@ -69,5 +69,14 @@ function SearchComponentRow({ name, id }: SearchRowComponentProps) {
     </div>
   );
 }
+/*
 
+(
+  <img
+    className={styles['small-poke-img']}
+    src={data ? data.sprites.front_default : null}
+    alt="small-poke-img"
+  />
+)}
+  */
 export default SearchComponentRow;

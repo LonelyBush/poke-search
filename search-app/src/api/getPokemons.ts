@@ -26,3 +26,10 @@ export const {
   useGetPokemonByNumQuery,
   useGetPokemonBySpeciesByNumQuery,
 } = pokemonApi;
+
+export const getAllPokemon = async (limit: number) => {
+  const call = await fetch(
+    `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=0`,
+  );
+  return call;
+};
