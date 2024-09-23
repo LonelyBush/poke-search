@@ -9,6 +9,7 @@
   }
 
   .label-wrapper .checkbox[type="checkbox"] {
+    display: block;
     position: absolute;
     opacity: 0;
     cursor: pointer;
@@ -20,9 +21,10 @@
   }
   
   .checkmark {
+    display: block;
     position: absolute;
     top: -0.7rem;
-    left: 0;
+    right: 0;
     height: 1.6rem;
     width: 1.6rem;
     background-color: #eee;

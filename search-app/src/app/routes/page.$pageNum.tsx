@@ -1,15 +1,15 @@
 import { LoaderFunctionArgs } from '@remix-run/server-runtime';
 import { getAllPokemon } from '../../api/getPokemons';
-import ItemsList from '../../components/items_list/items_list';
+import ItemsList from '../../components/base/items_list/items_list';
 import getSearchQueryData from '../../utils/get-search-query-data';
 import { PokeCall } from '../../interfaces/api_interfaces';
-import Pagination from '../../components/pagination/pagination-items-list';
+import Pagination from '../../components/component/pagination/pagination-items-list';
 
 export async function loader({ request, params }: LoaderFunctionArgs) {
   const { pageNum } = params;
   const url = new URL(request.url);
   const searchQuery = url.searchParams.get('query');
-  const postPerPage = 20;
+  const postPerPage = 21;
   let currentPosts;
   let resultsLength;
   try {
@@ -34,7 +34,7 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
   return { currentPosts, resultsLength };
 }
 
-function SearchPage() {
+export default function SearchPage() {
   return (
     <>
       <ItemsList />
@@ -42,5 +42,3 @@ function SearchPage() {
     </>
   );
 }
-
-export default SearchPage;
