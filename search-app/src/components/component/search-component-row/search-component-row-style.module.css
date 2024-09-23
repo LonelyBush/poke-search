@@ -35,8 +35,8 @@
     font-size: 1.5rem;
     padding: 0.5rem;
     box-shadow: var(--box-shadow);
-    background-color: var(--main-white);
-    border: var(--main-border);
+    background-color: var(--c-main-white);
+    border: var(--c-main-border);
     border-radius: 0.3rem;
     cursor: pointer;
     text-decoration: none;
@@ -49,32 +49,30 @@
 }
 
 .search-row-content.active{
-    background-color: var(--main-color-red);
-    border: 1px solid var(--main-color-red);
+    background-color: var(--c-main-red);
+    border: 0.1rem solid var(--c-main-red);
     border-radius: 6px;
-    box-shadow: var(--box-shadow);
     cursor: pointer;
-    color: var(--main-white);
+    color: var(--c-main-white);
 }
 
 .search-row-content:hover{
-    background-color: var(--main-color-red);
-    border: 1px solid var(--main-color-red);
+    background-color: var(--c-main-red);
+    border: 0.1rem solid var(--c-main-red);
     border-radius: 6px;
-    box-shadow: var(--box-shadow);
     cursor: pointer;
-    color: var(--main-white);
+    color: var(--c-main-white);
 }
 
 .search-row-content.dark {
     background-color: var(--c-dark-100);
-    border: 1px solid var(--c-dark-100);
+    border: 0.1rem solid var(--c-dark-100);
     box-shadow: var(--dark-box-shadow);
 }
 
 .search-row-content.dark.active {
     background-color: var(--c-dark-200);
-    border: 1px solid var(--c-dark-200);
+    border: 0.1rem solid var(--c-dark-200);
     box-shadow: var(--dark-box-shadow);
 }
 

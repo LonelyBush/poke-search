@@ -2,7 +2,6 @@ import { Links, Meta, Outlet, Scripts } from '@remix-run/react';
 import { ThemeProvider } from '../lib/context/theme_context';
 import ProviderWrapper from '../utils/provider_wrapper';
 import '../index.css';
-import SearchBar from '../components/base/search_bar/search_bar';
 import DefaultErrorBoundary from '../components/base/error_boundry/error_boundary';
 
 export default function App() {
@@ -20,7 +19,6 @@ export default function App() {
         <ProviderWrapper>
           <ThemeProvider>
             <div id="root">
-              <SearchBar />
               <Outlet />
             </div>
           </ThemeProvider>

@@ -4,6 +4,7 @@ import ItemsList from '../../components/base/items_list/items_list';
 import getSearchQueryData from '../../utils/get-search-query-data';
 import { PokeCall } from '../../interfaces/api_interfaces';
 import Pagination from '../../components/component/pagination/pagination-items-list';
+import SearchBar from '../../components/base/search_bar/search_bar';
 
 export async function loader({ request, params }: LoaderFunctionArgs) {
   const { pageNum } = params;
@@ -37,6 +38,7 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
 export default function SearchPage() {
   return (
     <>
+      <SearchBar />
       <ItemsList />
       <Pagination />
     </>

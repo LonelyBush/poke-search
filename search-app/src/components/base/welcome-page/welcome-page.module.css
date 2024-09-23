@@ -1,0 +1,15 @@
+.welcome-page-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+    height: 70vh;
+    gap: 1rem;
+}
+
+.welcome-page-container > button {
+    align-self: center;
+    width: 10rem;
+}
+
+

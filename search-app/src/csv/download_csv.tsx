@@ -1,14 +1,15 @@
+import Button from '../components/ui/button/button';
+import useTheme from '../hooks/useTheme-hook';
 import PayloadInterface from '../interfaces/payload_interface';
 
 function DownloadCSV({
   data,
   itemsCount,
-  className,
 }: {
-  className: string;
   data: PayloadInterface[];
   itemsCount: string;
 }) {
+  const {theme} = useTheme();
   const jsonToCsv = (jsonData: PayloadInterface[]) => {
     let csv = '';
     const headers = Object.keys(jsonData[0]);
@@ -30,9 +31,7 @@ function DownloadCSV({
       href={csvURL}
       download={`${itemsCount}-items_pokemon_data.csv`}
     >
-      <button className={className} type="button">
-        Download
-      </button>
+      <Button theme={theme} btnType="button">Download</Button>
     </a>
   );
 }

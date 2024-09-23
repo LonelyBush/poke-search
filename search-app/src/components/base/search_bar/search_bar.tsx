@@ -8,6 +8,8 @@ import ToggleSwitch from '../../ui/toggle_switch/toggle_switch';
 import { RootState } from '../../../lib/store/store';
 import DownloadCSV from '../../../csv/download_csv';
 import useTheme from '../../../hooks/useTheme-hook';
+import pokeSearchLogo from '../../../assets/pics/poke-search-logo.png';
+import Button from '../../ui/button/button';
 
 function SearchBar() {
   const { theme, setTheme } = useTheme();
@@ -28,7 +30,11 @@ function SearchBar() {
     <div className={`${styles[`search-bar-container`]} ${styles[`${theme}`]}`}>
       <div className={styles['title-form-wrapper']}>
         <div className={styles['title-section']}>
-          <h2>Poke Search</h2>
+          <img
+            className={styles['title-img']}
+            src={pokeSearchLogo}
+            alt="poke-search-logo"
+          />
           <ToggleSwitch onChange={handleOnChangeSwitch} />
         </div>
 
@@ -52,30 +58,19 @@ function SearchBar() {
               />
             ) : null}
           </div>
-          <button
-            className={`${styles[`submit-btn`]} ${styles[`${theme}`]}`}
-            type="submit"
-          >
+          <Button btnType="submit" theme={theme}>
             Search
-          </button>
+          </Button>
         </Form>
         {posts.length !== 0 ? (
           <div className={styles['counter-section']}>
             <div
               className={styles['items-counter']}
             >{`${posts.length} items`}</div>
-            <button
-              onClick={handleClearAll}
-              className={`${styles[`submit-btn`]} ${styles[`${theme}`]}`}
-              type="button"
-            >
+            <Button onClick={handleClearAll} btnType="button" theme={theme}>
               Clear All
-            </button>
-            <DownloadCSV
-              className={`${styles[`submit-btn`]} ${styles[`${theme}`]}`}
-              data={posts}
-              itemsCount={posts.length.toString()}
-            />
+            </Button>
+            <DownloadCSV data={posts} itemsCount={posts.length.toString()} />
           </div>
         ) : null}
       </div>
