@@ -9,7 +9,7 @@ function DownloadCSV({
   data: PayloadInterface[];
   itemsCount: string;
 }) {
-  const {theme} = useTheme();
+  const { theme } = useTheme();
   const jsonToCsv = (jsonData: PayloadInterface[]) => {
     let csv = '';
     const headers = Object.keys(jsonData[0]);
@@ -31,7 +31,9 @@ function DownloadCSV({
       href={csvURL}
       download={`${itemsCount}-items_pokemon_data.csv`}
     >
-      <Button theme={theme} btnType="button">Download</Button>
+      <Button theme={theme} btnType="button">
+        Download
+      </Button>
     </a>
   );
 }

@@ -26,57 +26,60 @@ function Pagination() {
   const [pages] = Object.values(obj).filter((elem) => {
     return elem.includes(Number(pageNum));
   });
-
   return (
     <div
       data-testid="pagination-container"
       className={`${styles[`pagination-container`]} ${styles[`${theme}`]}`}
     >
-      <NavLink
-        className={`${styles[`pagination-button`]} ${Number(pageNum) === 1 ? styles.disabled : ''} ${styles[`${theme}`]}`}
-        to={`/page/${1}?${searchParams}`}
-        type="button"
-      >
-        &laquo;
-      </NavLink>
-      <NavLink
-        className={`${styles[`pagination-button`]} ${Number(pageNum) === 1 ? styles.disabled : ''} ${styles[`${theme}`]}`}
-        to={`/page/${Number(pageNum) - 1}?${searchParams}`}
-        type="button"
-      >
-        &lsaquo;
-      </NavLink>
-      {pages.map((elem) => {
-        return (
+      {pages && (
+        <>
           <NavLink
-            className={({ isActive }) =>
-              isActive
-                ? `${styles[`pagination-button`]} ${styles[`${theme}`]} ${styles.active}`
-                : `${styles[`pagination-button`]} ${styles[`${theme}`]}`
-            }
-            to={`/page/${elem}?${searchParams}`}
-            key={elem}
+            className={`${styles[`pagination-button`]} ${Number(pageNum) === 1 ? styles.disabled : ''} ${styles[`${theme}`]}`}
+            to={`/page/${1}?${searchParams}`}
             type="button"
           >
-            {elem}
+            &laquo;
           </NavLink>
-        );
-      })}
-      <NavLink
-        className={`${styles[`pagination-button`]} ${Number(pageNum) === totalPages ? styles.disabled : ''} ${styles[`${theme}`]}`}
-        to={`/page/${Number(pageNum) + 1}?${searchParams}`}
-        type="button"
-      >
-        &rsaquo;
-      </NavLink>
+          <NavLink
+            className={`${styles[`pagination-button`]} ${Number(pageNum) === 1 ? styles.disabled : ''} ${styles[`${theme}`]}`}
+            to={`/page/${Number(pageNum) - 1}?${searchParams}`}
+            type="button"
+          >
+            &lsaquo;
+          </NavLink>
+          {pages.map((elem) => {
+            return (
+              <NavLink
+                className={({ isActive }) =>
+                  isActive
+                    ? `${styles[`pagination-button`]} ${styles[`${theme}`]} ${styles.active}`
+                    : `${styles[`pagination-button`]} ${styles[`${theme}`]}`
+                }
+                to={`/page/${elem}?${searchParams}`}
+                key={elem}
+                type="button"
+              >
+                {elem}
+              </NavLink>
+            );
+          })}
+          <NavLink
+            className={`${styles[`pagination-button`]} ${Number(pageNum) === totalPages ? styles.disabled : ''} ${styles[`${theme}`]}`}
+            to={`/page/${Number(pageNum) + 1}?${searchParams}`}
+            type="button"
+          >
+            &rsaquo;
+          </NavLink>
 
-      <NavLink
-        className={`${styles[`pagination-button`]} ${Number(pageNum) === totalPages ? styles.disabled : ''} ${styles[`${theme}`]}`}
-        to={`/page/${totalPages}?${searchParams}`}
-        type="button"
-      >
-        &raquo;
-      </NavLink>
+          <NavLink
+            className={`${styles[`pagination-button`]} ${Number(pageNum) === totalPages ? styles.disabled : ''} ${styles[`${theme}`]}`}
+            to={`/page/${totalPages}?${searchParams}`}
+            type="button"
+          >
+            &raquo;
+          </NavLink>
+        </>
+      )}
     </div>
   );
 }

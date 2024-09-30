@@ -1,17 +1,29 @@
 @import '../../../styles//colors.css';
 
 .item-container{
+    position: absolute;
+    top: 35vh;
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+    width: fit-content;
     padding: 1rem;
-    height: 20rem;;
     box-shadow: var(--box-shadow);
     background-color: var(--c-main-white);
     border: var(--c-main-border);
     border-radius: 0.5rem;
 
+}
+
+.head-section{
+    display: flex;
+    justify-content: space-around;
+}
+
+.content-section{
+    display: flex;
+    justify-content: center;
 }
 
 .item-container.dark {
@@ -40,6 +52,8 @@
     gap: 0.4rem;
     margin-bottom: 1.2rem;
     text-align: start;
+    font-size: 1.2rem;
+
 }
 
 .name-type-container > h3 {
@@ -65,11 +79,7 @@
     margin-right: 5px;
     margin-left: 3px;
 }
-.flavor-text{
-    display: flex;
-    line-height: 1.4rem;
-    margin-bottom: 1.4rem;
-}
+
 
 .close-btn {
     display: flex;

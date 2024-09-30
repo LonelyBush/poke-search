@@ -35,3 +35,22 @@ export interface PokeFlavor {
 export interface PokeSpecies {
   flavor_text_entries: PokeFlavor[];
 }
+
+export interface PokemonResponse {
+  name: string;
+  types: PokeType[];
+  stats: PokeStats[];
+  sprites: {
+    other: {
+      'official-artwork': {
+        front_default: string;
+      };
+    };
+  };
+}
+export interface DetailResult {
+  pokemon_data: PokemonResponse;
+  pokemon_species: PokeSpecies;
+  pokemon_weakness: string[];
+  pokemon_evolution_chain: string[];
+}

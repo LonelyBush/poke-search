@@ -8,7 +8,7 @@ import { installGlobals } from "@remix-run/node";
 installGlobals();
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [remix({ appDirectory: 'src/app' })],
+  plugins: [remix({ appDirectory: 'src/app', })],
   test: {
     globals: true,
     environment: 'jsdom',

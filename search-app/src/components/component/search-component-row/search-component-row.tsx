@@ -41,7 +41,7 @@ function SearchComponentRow({ name, id }: SearchRowComponentProps) {
   return (
     <div className={styles['search-row-container']}>
       <NavLink
-        to={`detail/${name}`}
+        to={`${name}`}
         className={({ isActive }) =>
           isActive
             ? `${styles['search-row-content']} ${styles[`${theme}`]} ${styles.active}`

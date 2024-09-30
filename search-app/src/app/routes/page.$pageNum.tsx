@@ -1,4 +1,5 @@
-import { LoaderFunctionArgs } from '@remix-run/server-runtime';
+import { json, LoaderFunctionArgs } from '@remix-run/server-runtime';
+import { Outlet } from '@remix-run/react';
 import { getAllPokemon } from '../../api/getPokemons';
 import ItemsList from '../../components/base/items_list/items_list';
 import getSearchQueryData from '../../utils/get-search-query-data';
@@ -14,7 +15,7 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
   let currentPosts;
   let resultsLength;
   try {
-    const response = await getAllPokemon(1302);
+    const response = await getAllPokemon(1014);
     if (!response) {
       throw new Error('Fetch failed');
     }
@@ -32,7 +33,7 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
       return { error: err.message };
     }
   }
-  return { currentPosts, resultsLength };
+  return json({ currentPosts, resultsLength });
 }
 
 export default function SearchPage() {
@@ -41,6 +42,7 @@ export default function SearchPage() {
       <SearchBar />
       <ItemsList />
       <Pagination />
+      <Outlet />
     </>
   );
 }

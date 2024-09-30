@@ -1,0 +1,22 @@
+.evolution-chain-container{
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+}
+
+.evolution-chain-container > div > a > img{
+    width: 10rem;
+
+}
+
+.evolution-chain-container > div > a{
+    width: 10rem;
+    height: 10rem;
+
+}
+
+
+.evolution-chain-container > div > div > p{
+    font-size: 1rem;
+
+}

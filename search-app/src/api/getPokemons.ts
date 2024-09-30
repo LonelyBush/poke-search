@@ -14,8 +14,8 @@ export const pokemonApi = createApi({
     getPokemonByNum: builder.query({
       query: (num: string) => `pokemon/${num}`,
     }),
-    getPokemonBySpeciesByNum: builder.query({
-      query: (num: string) => `pokemon-species/${num}`,
+    getPokemonBySpeciesByName: builder.query({
+      query: (name: string) => `pokemon-species/${name}`,
     }),
   }),
 });
@@ -24,7 +24,7 @@ export const {
   useGetAllPokemonQuery,
   useGetPokemonByNameQuery,
   useGetPokemonByNumQuery,
-  useGetPokemonBySpeciesByNumQuery,
+  useGetPokemonBySpeciesByNameQuery,
 } = pokemonApi;
 
 export const getAllPokemon = async (limit: number) => {

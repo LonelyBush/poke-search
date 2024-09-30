@@ -1,6 +1,8 @@
 .pokemon-type-container{
     display: flex;
     align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
 }
 
 .pokemon-type-container > p {
@@ -10,9 +12,8 @@
 
 .type-icon{
     display: inline-block;
-    width: 6.8rem;
+    width: 45%;
     background: #dbdbdb;
-    margin: 0 0.2rem;
     border: 1px solid #a3a3a3;
     border-radius: 4px;
     border: 1px solid rgba(0, 0, 0, .2);
