@@ -52,5 +52,5 @@ export interface DetailResult {
   pokemon_data: PokemonResponse;
   pokemon_species: PokeSpecies;
   pokemon_weakness: string[];
-  pokemon_evolution_chain: string[];
+  pokemon_evolution_chain: string[] | string[][];
 }

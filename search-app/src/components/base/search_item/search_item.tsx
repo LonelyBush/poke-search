@@ -21,36 +21,35 @@ function SearchItem() {
     navigate(`/page/${pageNum}`);
   };
   return (
-    <div
-      id="detail"
-      className={`${styles['item-container']} ${styles[`${theme}`]}`}
-    >
-      <div className={styles['head-section']}>
-        <h3>
-          {pokemon_data.name.charAt(0).toUpperCase() +
-            pokemon_data.name.slice(1)}
-        </h3>
-        <CloseBtn onClick={handleClose} />
-      </div>
-      <div className={styles['content-section']}>
-        <div className={styles['poke-img-container']}>
-          <img
-            alt="pokemon-pic"
-            src={pokemon_data.sprites.other['official-artwork'].front_default}
-          />
-          <PokemonStats stats={pokemon_data.stats} />
+    <div id="detail" className={`${styles['detail-container-overlay']}`}>
+      <div className={`${styles['item-container']} ${styles[`${theme}`]}`}>
+        <div className={styles['head-section']}>
+          <h3>
+            {pokemon_data.name.charAt(0).toUpperCase() +
+              pokemon_data.name.slice(1)}
+          </h3>
+          <CloseBtn onClick={handleClose} />
         </div>
+        <div className={styles['content-section']}>
+          <div className={styles['poke-img-container']}>
+            <img
+              alt="pokemon-pic"
+              src={pokemon_data.sprites.other['official-artwork'].front_default}
+            />
+            <PokemonStats stats={pokemon_data.stats} />
+          </div>
 
-        <div className={styles['name-type-container']}>
-          <PokemonFlavorText />
-          Type
-          <PokemonTypes types={pokemon_data.types} />
-          Weaknesses
-          <PokemonWeakness />
+          <div className={styles['name-type-container']}>
+            <PokemonFlavorText />
+            Type
+            <PokemonTypes types={pokemon_data.types} />
+            Weaknesses
+            <PokemonWeakness />
+          </div>
         </div>
-      </div>
-      <div className={styles['evolution-section']}>
-        <EvolutionChain />
+        <div className={styles['evolution-section']}>
+          <EvolutionChain />
+        </div>
       </div>
     </div>
   );

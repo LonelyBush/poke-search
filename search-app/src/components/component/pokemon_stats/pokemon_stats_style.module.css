@@ -1,5 +1,5 @@
 .stat-icon{
-    width: 1.6rem;
+    width: 2.3rem;
     aspect-ratio: 1;
 }
 
@@ -8,12 +8,13 @@
     flex-direction: column;
     align-items: center;
     gap: 0.45rem;
+    font-size: 1.2rem;
 }
 
 .stats-container{
     display: flex;
     flex-direction: row;
-    gap: 1rem;
+    gap: 1.5rem;
     align-items: center;
     justify-content: center;
 }

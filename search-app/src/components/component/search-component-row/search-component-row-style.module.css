@@ -4,13 +4,20 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    
+    position: relative;   
 }
 
 .name-types-wrapper{
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+}
+
+.name-types-wrapper.dark{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    color: var(--c-main-white)
 }
 
 .name-block-wrapper{
@@ -51,7 +58,6 @@
 .search-row-content.active{
     background-color: var(--c-main-red);
     border: 0.1rem solid var(--c-main-red);
-    border-radius: 6px;
     cursor: pointer;
     color: var(--c-main-white);
 }
@@ -59,9 +65,7 @@
 .search-row-content:hover{
     background-color: var(--c-main-red);
     border: 0.1rem solid var(--c-main-red);
-    border-radius: 6px;
     cursor: pointer;
-    color: var(--c-main-white);
 }
 
 .search-row-content.dark {
@@ -70,10 +74,32 @@
     box-shadow: var(--dark-box-shadow);
 }
 
+.search-row-content.dark:hover {
+    background-color: var(--c-dark-200);
+    border: 0.1rem solid var(--c-dark-200);
+    box-shadow: var(--dark-box-shadow);
+    cursor: pointer;
+}
+
 .search-row-content.dark.active {
     background-color: var(--c-dark-200);
     border: 0.1rem solid var(--c-dark-200);
     box-shadow: var(--dark-box-shadow);
+
+}
+
+.search-row-content.pending {
+    box-shadow: 0 0.1rem 0.2rem var(--c-main-red);
+    cursor: pointer;
+    color: var(--c-main-white);
+    animation: pending 1s infinite;
+}
+
+.search-row-content.dark.pending {
+    box-shadow: 0 0.1rem 0.2rem var(--c-dark-200);
+    cursor: pointer;
+    color: var(--c-main-white);
+    animation: pending 1s infinite;
 }
 
 .small-poke-img {
@@ -98,4 +124,8 @@
     to {
         transform:rotate(360deg);
     }
+}
+
+@keyframes pending {
+    100% {box-shadow: 0 0 0 30px #0000}
 }

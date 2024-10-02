@@ -39,10 +39,19 @@ export async function loader({ params }: LoaderFunctionArgs) {
         ).flat(),
       ]),
     ];
-    const evoChain: string[] = [];
+    const evoChain: string[][] = [];
     const getEvo = (arr: typeof evolutionResult.chain) => {
       if (arr[0].evolves_to.length > 0) {
         evoChain.push(arr[0].species.name);
+        if (arr[0].evolves_to.length > 1) {
+          const deepChain = [] as string[];
+          arr[0].evolves_to.map(
+            (elem: typeof evolutionResult.chain.evolves_to) =>
+              deepChain.push(elem.species.name),
+          );
+          evoChain.push(deepChain);
+          return 0;
+        }
         getEvo(arr[0].evolves_to);
       } else {
         return evoChain.push(arr[0].species.name);

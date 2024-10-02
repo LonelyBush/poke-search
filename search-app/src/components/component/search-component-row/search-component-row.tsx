@@ -1,4 +1,5 @@
-import { NavLink } from 'react-router-dom';
+/* eslint-disable no-nested-ternary */
+import { NavLink, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { ChangeEvent, useEffect, useState } from 'react';
 import {
@@ -17,6 +18,7 @@ import PokemonTypes from '../pokemon_types/pokemon_types';
 function SearchComponentRow({ name, id }: SearchRowComponentProps) {
   const store = useSelector((state: RootState) => state.pokeStore);
   const dispatch = useDispatch();
+  const { pageNum } = useParams();
   const { data, isLoading } = useGetPokemonByNameQuery(name || '');
   const [checked, setChecked] = useState<boolean>(false);
   const HandleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -41,11 +43,13 @@ function SearchComponentRow({ name, id }: SearchRowComponentProps) {
   return (
     <div className={styles['search-row-container']}>
       <NavLink
-        to={`${name}`}
-        className={({ isActive }) =>
-          isActive
-            ? `${styles['search-row-content']} ${styles[`${theme}`]} ${styles.active}`
-            : `${styles['search-row-content']} ${styles[`${theme}`]}`
+        to={`/page/${pageNum}/${name}`}
+        className={({ isActive, isPending }) =>
+          isPending
+            ? `${styles['search-row-content']} ${styles[`${theme}`]} ${styles.pending}`
+            : isActive
+              ? `${styles['search-row-content']} ${styles[`${theme}`]} ${styles.active}`
+              : `${styles['search-row-content']} ${styles[`${theme}`]}`
         }
       >
         {isLoading ? (
@@ -62,7 +66,7 @@ function SearchComponentRow({ name, id }: SearchRowComponentProps) {
           />
         )}
       </NavLink>
-      <div className={styles['name-types-wrapper']}>
+      <div className={`${styles['name-types-wrapper']} ${styles[`${theme}`]}`}>
         <div className={styles['name-block-wrapper']}>
           <p>{name.charAt(0).toUpperCase() + name.slice(1)}</p>
           <CheckBox
@@ -78,14 +82,5 @@ function SearchComponentRow({ name, id }: SearchRowComponentProps) {
     </div>
   );
 }
-/*
 
-(
-  <img
-    className={styles['small-poke-img']}
-    src={data ? data.sprites.front_default : null}
-    alt="small-poke-img"
-  />
-)}
-  */
 export default SearchComponentRow;

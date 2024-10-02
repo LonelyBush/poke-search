@@ -16,5 +16,4 @@ function EmptySearchResult() {
     </div>
   );
 }
-
 export default EmptySearchResult;

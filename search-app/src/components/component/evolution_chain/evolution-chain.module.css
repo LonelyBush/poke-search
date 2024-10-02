@@ -1,7 +1,25 @@
+@import '../../../styles/colors.css';
+
 .evolution-chain-container{
     display: flex;
     flex-direction: row;
+    justify-content: space-evenly;
+    gap: 1.5rem;
+}
+
+.evolution-chain-wrapper{
+    display: flex;
+    flex-direction: column;
     gap: 0.5rem;
+    font-size: 1.5rem;
+    text-align: start;
+    background-color: #c5d9e7;
+    padding: 1rem;
+    border-radius: 0.5rem;
+}
+
+.evolution-chain-wrapper.dark{
+    background-color: var(--c-dark-500);
 }
 
 .evolution-chain-container > div > a > img{
@@ -9,14 +27,80 @@
 
 }
 
-.evolution-chain-container > div > a{
-    width: 10rem;
-    height: 10rem;
+.evolution-chain-container > div{
+    justify-content: center;
 
 }
 
 
-.evolution-chain-container > div > div > p{
+.evolution-chain-container > div > div > div > div > label{
+    display: none;
+
+}
+
+
+.evolution-chain-container > div > a{
+    width: 10rem;
+    height: 10rem;
+    border-radius: 50%;
+
+}
+
+
+.evolution-chain-container > div > div > div > p{
+    font-size: 1.3rem;
+
+}
+
+.deep-chain-collection{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    max-width: 39rem;
+    min-height: 25rem;
+    gap: 0.5rem;
+}
+
+.deep-chain-collection.small{
+    max-width: 15rem;
+}
+
+
+.deep-chain-collection > div > a > img{
+    width: 7rem;
+
+}
+
+.deep-chain-collection > div > a{
+    width: 7rem;
+    height: 7rem;
+    border-radius: 50%;
+
+}
+
+
+.deep-chain-collection > div > div > div > p{
     font-size: 1rem;
 
+}
+
+.deep-chain-collection > div > div > div > div > label{
+    display: none;
+
+}
+
+
+@media (max-width: 650px){
+    
+.evolution-chain-container{
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.deep-chain-collection.small{
+    max-width: 39rem;
+    align-items: center;
+}
 }
