@@ -15,11 +15,11 @@ function EvolutionChain() {
       Evolutions
       <div className={styles['evolution-chain-container']}>
         {pokemon_evolution_chain.map((pokemon, index) => {
-          return typeof pokemon !== 'object' ? (
+          return !Array.isArray(pokemon) ? (
             <SearchComponentRow
               key={pokemon}
               id={index.toString()}
-              name={pokemon}
+              poke_id={pokemon}
             />
           ) : (
             <div
@@ -35,7 +35,7 @@ function EvolutionChain() {
                   <SearchComponentRow
                     key={elem}
                     id={i.toString()}
-                    name={elem}
+                    poke_id={elem}
                   />
                 );
               })}

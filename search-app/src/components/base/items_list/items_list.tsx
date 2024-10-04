@@ -4,6 +4,7 @@ import { LoaderResponse } from '../../../interfaces/api_interfaces';
 import EmptySearchResult from '../../component/empry-search-result/empty-search-result';
 import useTheme from '../../../hooks/useTheme-hook';
 import SearchComponentRow from '../../component/search-component-row/search-component-row';
+import getIdFromURL from '../../../utils/get-id-from-url';
 
 function ItemsList() {
   const { currentPosts } = useLoaderData<LoaderResponse>();
@@ -17,7 +18,7 @@ function ItemsList() {
         <SearchComponentRow
           key={elem.url}
           id={index.toString()}
-          name={elem.name}
+          poke_id={getIdFromURL(elem.url)}
         />
       );
     });

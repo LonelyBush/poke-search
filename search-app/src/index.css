@@ -1,5 +1,6 @@
 body {
     width: 100%;
+
     text-align: center;
     margin: 0 auto;
     padding: 0;
@@ -11,4 +12,5 @@ body {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+    height: 100%;
 }

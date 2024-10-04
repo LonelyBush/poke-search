@@ -15,7 +15,7 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
   let currentPosts;
   let resultsLength;
   try {
-    const response = await getAllPokemon(1014);
+    const response = await getAllPokemon(1017);
     if (!response) {
       throw new Error('Fetch failed');
     }

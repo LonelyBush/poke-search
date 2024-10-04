@@ -1,5 +1,5 @@
 /* eslint-disable no-nested-ternary */
-import { NavLink, useParams } from 'react-router-dom';
+import { NavLink, useParams, useSearchParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { ChangeEvent, useEffect, useState } from 'react';
 import {
@@ -15,17 +15,19 @@ import { RootState } from '../../../lib/store/store';
 import useTheme from '../../../hooks/useTheme-hook';
 import PokemonTypes from '../pokemon_types/pokemon_types';
 
-function SearchComponentRow({ name, id }: SearchRowComponentProps) {
+function SearchComponentRow({ id, poke_id }: SearchRowComponentProps) {
   const store = useSelector((state: RootState) => state.pokeStore);
   const dispatch = useDispatch();
   const { pageNum } = useParams();
-  const { data, isLoading } = useGetPokemonByNameQuery(name || '');
+  const [searchParams] = useSearchParams();
+  const { data, isLoading } = useGetPokemonByNameQuery(poke_id || '');
+
   const [checked, setChecked] = useState<boolean>(false);
   const HandleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     setChecked(!checked);
     const createJson = {
       id,
-      name,
+      name: data.name,
       height: data.height,
       experience: data.base_experience,
     };
@@ -36,14 +38,14 @@ function SearchComponentRow({ name, id }: SearchRowComponentProps) {
     );
   };
   useEffect(() => {
-    setChecked(store.find((elem) => elem.name === name) !== undefined);
+    setChecked(store.find((elem) => elem.name === data.name) !== undefined);
   }, [store]);
 
   const { theme } = useTheme();
   return (
     <div className={styles['search-row-container']}>
       <NavLink
-        to={`/page/${pageNum}/${name}`}
+        to={`/page/${pageNum}/${isLoading ? '' : data.name}?${searchParams}`}
         className={({ isActive, isPending }) =>
           isPending
             ? `${styles['search-row-content']} ${styles[`${theme}`]} ${styles.pending}`
@@ -68,14 +70,22 @@ function SearchComponentRow({ name, id }: SearchRowComponentProps) {
       </NavLink>
       <div className={`${styles['name-types-wrapper']} ${styles[`${theme}`]}`}>
         <div className={styles['name-block-wrapper']}>
-          <p>{name.charAt(0).toUpperCase() + name.slice(1)}</p>
-          <CheckBox
-            theme={theme}
-            checked={checked}
-            name={name}
-            id={`${name}-${id}`}
-            onChange={HandleOnChange}
-          />
+          <p>
+            {isLoading
+              ? ''
+              : data.name.charAt(0).toUpperCase() + data.name.slice(1)}
+          </p>
+          {isLoading ? (
+            ''
+          ) : (
+            <CheckBox
+              theme={theme}
+              checked={checked}
+              name={data.name}
+              id={`${data.name}-${id}`}
+              onChange={HandleOnChange}
+            />
+          )}
         </div>
         {isLoading ? '' : <PokemonTypes types={data.types} />}
       </div>

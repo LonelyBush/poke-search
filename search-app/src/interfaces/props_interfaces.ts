@@ -19,6 +19,6 @@ export interface PaginationProps {
 }
 
 export interface SearchRowComponentProps {
-  name: string;
+  poke_id: string;
   id: string;
 }

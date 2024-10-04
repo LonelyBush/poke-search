@@ -1,6 +1,6 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable jsx-a11y/control-has-associated-label */
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { useLoaderData } from '@remix-run/react';
 import styles from './search_item_style.module.css';
 import PokemonStats from '../../component/pokemon_stats/pokemon_stats';
@@ -16,9 +16,10 @@ function SearchItem() {
   const { theme } = useTheme();
   const { pokemon_data } = useLoaderData<DetailResult>();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const { pageNum } = useParams();
   const handleClose = () => {
-    navigate(`/page/${pageNum}`);
+    navigate(`/page/${pageNum}?${searchParams}`);
   };
   return (
     <div id="detail" className={`${styles['detail-container-overlay']}`}>

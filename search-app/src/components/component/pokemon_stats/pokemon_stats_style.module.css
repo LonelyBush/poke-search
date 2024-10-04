@@ -18,3 +18,10 @@
     align-items: center;
     justify-content: center;
 }
+
+
+@media (max-width: 370px){
+    .stats-container{
+        gap: 0.5rem;
+    }
+}
