@@ -3,6 +3,7 @@
     flex-direction: column;
     justify-content: center;
     align-self: center;
+    align-items: center;
     height: 70vh;
     gap: 1rem;
 }
@@ -11,5 +12,17 @@
     align-self: center;
     width: 10rem;
 }
+
+.welcome-page-container > p {
+    font-size: 1.2rem;
+    max-width: 46rem;
+    text-align: unset;
+}
+
+.welcome-page-container > img {
+    max-width: 50rem;
+}
+
+
 
 

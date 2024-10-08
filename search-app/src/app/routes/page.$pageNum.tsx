@@ -1,6 +1,5 @@
 import { json, LoaderFunctionArgs } from '@remix-run/server-runtime';
 import { Outlet } from '@remix-run/react';
-import { getAllPokemon } from '../../api/getPokemons';
 import ItemsList from '../../components/base/items_list/items_list';
 import getSearchQueryData from '../../utils/get-search-query-data';
 import { PokeCall } from '../../interfaces/api_interfaces';
@@ -15,7 +14,9 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
   let currentPosts;
   let resultsLength;
   try {
-    const response = await getAllPokemon(1017);
+    const response = await fetch(
+      'https://pokeapi.co/api/v2/pokemon?limit=1017&offset=0',
+    );
     if (!response) {
       throw new Error('Fetch failed');
     }

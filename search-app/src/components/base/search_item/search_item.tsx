@@ -11,6 +11,7 @@ import useTheme from '../../../hooks/useTheme-hook';
 import PokemonWeakness from '../../component/pokemon_weakness/pokemon-weakness';
 import EvolutionChain from '../../component/evolution_chain/evolution-chain';
 import { DetailResult } from '../../../interfaces/api_interfaces';
+import PokemonTable from '../../component/pokemon_table/pokemon-table';
 
 function SearchItem() {
   const { theme } = useTheme();
@@ -42,6 +43,7 @@ function SearchItem() {
 
           <div className={styles['name-type-container']}>
             <PokemonFlavorText />
+            <PokemonTable />
             Type
             <PokemonTypes types={pokemon_data.types} />
             Weaknesses

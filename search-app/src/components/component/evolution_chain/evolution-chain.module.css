@@ -13,7 +13,7 @@
     gap: 0.5rem;
     font-size: 1.5rem;
     text-align: start;
-    background-color: #c5d9e7;
+    background-color: var(--c-main-bright-blue);
     padding: 1rem;
     border-radius: 0.5rem;
 }

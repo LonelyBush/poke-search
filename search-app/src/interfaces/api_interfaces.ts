@@ -34,6 +34,9 @@ export interface PokeFlavor {
 
 export interface PokeSpecies {
   flavor_text_entries: PokeFlavor[];
+  shape: {
+    name: string;
+  };
 }
 
 export interface PokemonResponse {
@@ -47,6 +50,15 @@ export interface PokemonResponse {
       };
     };
   };
+  abilities: {
+    ability: {
+      name: string;
+      url: string;
+    };
+    is_hidden: boolean;
+  }[];
+  height: number;
+  weight: number;
 }
 export interface DetailResult {
   pokemon_data: PokemonResponse;

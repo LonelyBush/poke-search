@@ -1,4 +1,5 @@
 import { PokeResult } from '../interfaces/api_interfaces';
+import getIdFromURL from './get-id-from-url';
 
 const getSearchQueryData = (
   searchQuery: string,
@@ -6,7 +7,9 @@ const getSearchQueryData = (
 ): PokeResult[] => {
   const changedQuery = searchQuery.trim().toLowerCase();
   return responsedResults.filter((elem: PokeResult) =>
-    elem.name.startsWith(changedQuery),
+    Number(changedQuery)
+      ? getIdFromURL(elem.url).startsWith(changedQuery)
+      : elem.name.startsWith(changedQuery),
   );
 };
 

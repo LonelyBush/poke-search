@@ -10,7 +10,13 @@ function WelcomeContent() {
   return (
     <div className={styles['welcome-page-container']}>
       <img src={pokeLogo} alt="poke-logo" />
-      <p>Description about app </p>
+      <p>
+        The Poke Search App is a web application that allows users to explore
+        and retrieve detailed information about Pokémon. The app provides an
+        intuitive and user-friendly interface for searching for any Pokémon by
+        name or Pokédex number. Upon searching, users can view key data about
+        each Pokémon, including stats, types, abilities, evolutions, and more.
+      </p>
       <Button
         onClick={() => {
           navigate('/page/1');
