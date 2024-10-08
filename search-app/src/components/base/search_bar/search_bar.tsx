@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { ChangeEvent, useState } from 'react';
-import { Form } from '@remix-run/react';
+import { Form, useSearchParams } from '@remix-run/react';
 import { removeAllPokemons } from '../../../lib/redux_slice/redux_slice';
 import styles from './search_bar-style.module.css';
 import CloseBtn from '../../ui/close_btn/close_btn';
@@ -15,13 +15,24 @@ function SearchBar() {
   const { theme, setTheme } = useTheme();
   const posts = useSelector((state: RootState) => state.pokeStore);
   const dispatch = useDispatch();
-  const [queryState, setQueryState] = useState<string>('');
+  const [searchParams] = useSearchParams();
+  const [queryState, setQueryState] = useState<string>(
+    searchParams.get('query') || '',
+  );
   const [focus, setFocus] = useState<boolean>(false);
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     setQueryState(e.currentTarget.value);
   };
   const handleOnChangeSwitch = (e: ChangeEvent<HTMLInputElement>) => {
     setTheme(e.currentTarget.checked ? 'dark' : '');
+    const body = document.querySelector('body');
+    if (body !== null) {
+      if (e.currentTarget.checked) {
+        body.classList.add('dark');
+      } else {
+        body.classList.remove('dark');
+      }
+    }
   };
   const handleClearAll = () => {
     dispatch(removeAllPokemons());

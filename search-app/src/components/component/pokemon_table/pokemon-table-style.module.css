@@ -23,8 +23,8 @@ border-radius: 0.5rem;
 
 .pokemon-weight-height-column > div > p{
     margin: 0;
-    font-size: 1.35rem;
-    line-height: 1.95rem;
+    font-size: 1.25rem;
+    line-height: 1.67rem;
 }
 
 .pokemon-weight-height-column > div{
@@ -43,8 +43,8 @@ border-radius: 0.5rem;
 
 .pokemon-shape-abilities-column > div > p{
     margin: 0;
-    font-size: 1.35rem;
-    line-height: 1.95rem;
+    font-size: 1.25rem;
+    line-height: 1.67rem;
 }
 
 .pokemon-shape-abilities-column > div{

@@ -5,7 +5,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    min-height: 100vh;
+    min-height: 115vh;
     background-color: rgba(0, 0, 0, 0.5); 
     display: flex;
     justify-content: center;
@@ -28,7 +28,7 @@
     background-color: var(--c-main-white);
     border: var(--c-main-border);
     border-radius: 0.5rem;
-    gap: 1.7rem;
+    gap: 1.25rem;
     z-index: 1001;
 }
 
@@ -43,9 +43,9 @@
 
 .head-section > h3 {
     margin: 0;
-    font-size: 1.7rem;
+    font-size: 1.5rem;
     font-weight: 300;
-    letter-spacing: .056rem;
+    letter-spacing: .087rem;
 }
 
 .head-section > button {
@@ -68,14 +68,14 @@
 .poke-img-container{
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-evenly;
 
 }
 
 .poke-img-container > img {
     display: flex;
     align-self: center;
-    max-width: 23rem;
+    max-width: 20rem;
     
 }
 

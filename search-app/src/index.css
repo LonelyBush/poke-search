@@ -1,11 +1,16 @@
+@import './styles/colors.css';
+
 body {
     width: 100%;
-
     text-align: center;
     margin: 0 auto;
     padding: 0;
-    background-color: mintcream;
+    background-color: var(--c-main-white);
     font-family: 'Roboto', sans-serif;
+}
+
+body.dark {
+    background-color: var(--c-dark-500);
 }
 
 #root{

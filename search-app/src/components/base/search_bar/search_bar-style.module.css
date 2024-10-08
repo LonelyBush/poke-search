@@ -24,8 +24,7 @@
 }
 
 .title-img{
-    width: 15rem;
-    cursor: pointer;
+    width: 13rem;
 }
 
 .title-section{
@@ -84,7 +83,7 @@ input[type="text"]:focus {
     display: inline-block;
     position: absolute;
     right: 8.5rem;
-    top: 5.95rem;
+    top: 5.4rem;
     z-index: 1;
 }
 

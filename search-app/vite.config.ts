@@ -5,10 +5,10 @@
 import { defineConfig } from 'vite';
 import { vitePlugin as remix } from '@remix-run/dev';
 import { installGlobals } from "@remix-run/node";
+import { vercelPreset } from "@vercel/remix/vite";
 installGlobals();
-// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [remix({ appDirectory: 'src/app', })],
+  plugins: [remix({ appDirectory: 'src/app', presets: [vercelPreset()] })],
   test: {
     globals: true,
     environment: 'jsdom',
