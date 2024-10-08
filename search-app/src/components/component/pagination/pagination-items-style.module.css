@@ -6,10 +6,11 @@
     flex-direction: row;
     flex-wrap: wrap;
     gap: 0.4rem;
-    padding: 1.4rem 0;
+    padding: 1.4rem 0 0;
     justify-content: center;
     align-items: center;
     border: var(--c-main-border);
+    border-bottom: 0;
     background-color: var(--c-main-white);
 
 }
@@ -17,6 +18,7 @@
 .pagination-container.dark {
     color: var(--c-main-white);
     border: 0.1rem solid var(--c-dark-500);
+    border-bottom: 0;
     background-color: var(--c-dark-300);
 }
 

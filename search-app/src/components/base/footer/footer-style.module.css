@@ -1,0 +1,39 @@
+@import '../../../styles/colors.css';
+
+.footer-container{
+    font-size: 1.2rem;
+    padding-right: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 2rem;
+    border: var(--c-main-border);
+    border-top: 0;
+    background-color: var(--c-main-white);
+}
+
+.footer-container.dark{
+    color: var(--c-main-white);
+    border: 0.1rem solid var(--c-dark-500);
+    border-top: 0;
+    background-color: var(--c-dark-300);
+}
+
+.footer-links{
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.5s ease;
+}
+
+.footer-links:hover {
+    color: var(--c-main-red);
+    text-decoration: underline;
+}
+
+.footer-links.dark:hover {
+    color: var(--c-dark-100);
+    text-decoration: underline;
+}
+
+
+
