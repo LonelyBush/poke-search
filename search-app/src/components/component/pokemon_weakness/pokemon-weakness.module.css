@@ -1,0 +1,7 @@
+.pokemon-weaknesses-container {
+    display: flex;
+    max-width: 30rem;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}

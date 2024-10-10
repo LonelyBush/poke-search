@@ -1,0 +1,131 @@
+@import '../../../styles/colors.css';
+
+.search-row-container{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    position: relative;   
+}
+
+.name-types-wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.name-types-wrapper.dark{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    color: var(--c-main-white)
+}
+
+.name-block-wrapper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.name-block-wrapper > p{
+    margin: 0;
+    font-size: 1.5rem;
+    text-align: start;
+}
+
+.search-row-content{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 15rem;
+    height: 15rem;
+    gap: 0.5rem;
+    font-size: 1.5rem;
+    padding: 0.5rem;
+    box-shadow: var(--box-shadow);
+    background-color: var(--c-main-white);
+    border: var(--c-main-border);
+    border-radius: 0.3rem;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+}
+.types-block-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.search-row-content.active{
+    background-color: var(--c-main-red);
+    border: 0.1rem solid var(--c-main-red);
+    cursor: pointer;
+    color: var(--c-main-white);
+}
+
+.search-row-content:hover{
+    background-color: var(--c-main-red);
+    border: 0.1rem solid var(--c-main-red);
+    cursor: pointer;
+}
+
+.search-row-content.dark {
+    background-color: var(--c-dark-100);
+    border: 0.1rem solid var(--c-dark-100);
+    box-shadow: var(--dark-box-shadow);
+}
+
+.search-row-content.dark:hover {
+    background-color: var(--c-dark-200);
+    border: 0.1rem solid var(--c-dark-200);
+    box-shadow: var(--dark-box-shadow);
+    cursor: pointer;
+}
+
+.search-row-content.dark.active {
+    background-color: var(--c-dark-200);
+    border: 0.1rem solid var(--c-dark-200);
+    box-shadow: var(--dark-box-shadow);
+
+}
+
+.search-row-content.pending {
+    box-shadow: 0 0.1rem 0.2rem var(--c-main-red);
+    cursor: pointer;
+    color: var(--c-main-white);
+    animation: pending 1s infinite;
+}
+
+.search-row-content.dark.pending {
+    box-shadow: 0 0.1rem 0.2rem var(--c-dark-200);
+    cursor: pointer;
+    color: var(--c-main-white);
+    animation: pending 1s infinite;
+}
+
+.small-poke-img {
+    display: inline;
+    aspect-ratio: 1 / 1;
+    width: 15rem;
+    align-self: center;
+}
+
+.loading-prop-img{
+    justify-self: center;
+    align-self: center;
+    width: 10rem;
+    height: 10rem;
+    animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
+}
+
+@keyframes pending {
+    100% {box-shadow: 0 0 0 30px #0000}
+}

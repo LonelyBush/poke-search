@@ -1,0 +1,8 @@
+.flavor-text{
+    display: flex;
+    font-size: 1.13rem;
+    line-height: 1.46rem;
+    margin-bottom: 1.4rem;
+    word-break: break-word;
+    max-width: 20rem;
+}

@@ -1,0 +1,131 @@
+@import '../../../styles//colors.css';
+
+.detail-container-overlay{
+    position: absolute; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 115vh;
+    background-color: rgba(0, 0, 0, 0.5); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px); 
+    z-index: 1000; 
+    transition: all 0.5s ease;
+}
+
+.item-container{
+    position: absolute;
+    top: 2vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+    width: fit-content;
+    padding: 1rem;
+    box-shadow: var(--box-shadow);
+    background-color: var(--c-main-white);
+    border: var(--c-main-border);
+    border-radius: 0.5rem;
+    gap: 1.25rem;
+    z-index: 1001;
+}
+
+
+
+.head-section{
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+
+}
+
+.head-section > h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 300;
+    letter-spacing: .087rem;
+}
+
+.head-section > button {
+    position: absolute;
+    right: 0rem;
+}
+
+.content-section{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.item-container.dark {
+    color: var(--c-main-white);
+    border: 0.1rem solid var(--c-dark-500);
+    background-color: var(--c-dark-300);
+    box-shadow: var(--dark-box-shadow);
+}
+
+.poke-img-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+}
+
+.poke-img-container > img {
+    display: flex;
+    align-self: center;
+    max-width: 20rem;
+    
+}
+
+.name-type-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin-bottom: 1.2rem;
+    text-align: start;
+    font-size: 1.2rem;
+
+}
+
+.name-type-container > h3 {
+    font-size: 1.3rem;
+    margin: 0;
+}
+
+.pokemon-type{
+    display: flex;
+    align-items: center;
+}
+
+.pokemon-type > p:last-child {
+    margin: 0;
+    margin-top: 4px;
+}
+
+.pokemon-type > p:first-child{
+    margin: 0;
+}
+
+.pokemon-type > span{
+    margin-right: 5px;
+    margin-left: 3px;
+}
+
+@media (max-width: 550px) {
+    .detail-container-overlay{
+        min-height: 225vh;
+    }
+  .content-section{
+    flex-direction: column;
+    gap: 1rem;
+}
+
+}
+
+@media (max-width: 420px){
+    .poke-img-container > img {
+        max-width: 17rem;  
+    }
+}

@@ -1,0 +1,49 @@
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import '@testing-library/jest-dom';
+import { describe, expect, it, vi } from 'vitest';
+import SearchBar from './search_bar';
+import { SearchBarProps } from '../../../interfaces/props_interfaces';
+import ProviderWrapper from '../../../utils/provider_wrapper';
+
+describe('SearchBar', () => {
+  it('Should submit query correctly', async () => {
+    const mockType = 'Pikachu';
+    const props: SearchBarProps = {
+      handleSubmit: vi.fn((e) => e.preventDefault()),
+      searchValue: null,
+      setTheme: vi.fn(),
+    };
+    const { getByRole } = render(
+      <SearchBar
+        handleSubmit={props.handleSubmit}
+        searchValue={props.searchValue}
+        setTheme={props.setTheme}
+      />,
+      { wrapper: ProviderWrapper },
+    );
+    await userEvent.type(getByRole('textbox'), mockType);
+    await userEvent.click(getByRole('button', { name: 'Search' }));
+    expect(props.handleSubmit).toHaveBeenCalled();
+  });
+  it('Should set focus correctly', async () => {
+    const user = userEvent.setup();
+    const props: SearchBarProps = {
+      handleSubmit: vi.fn(),
+      searchValue: '',
+      setTheme: vi.fn(),
+    };
+    render(
+      <SearchBar
+        handleSubmit={props.handleSubmit}
+        searchValue={props.searchValue}
+        setTheme={props.setTheme}
+      />,
+      { wrapper: ProviderWrapper },
+    );
+    await user.click(screen.getByRole('textbox'));
+    expect(screen.getByRole('textbox').getAttribute('data-focused')).toBe(
+      'true',
+    );
+  });
+});

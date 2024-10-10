@@ -1,0 +1,27 @@
+.stat-icon{
+    width: 2.12rem;
+    aspect-ratio: 1;
+}
+
+.stat-block{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 1.15rem;
+}
+
+.stats-container{
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem;
+    align-items: center;
+    justify-content: center;
+}
+
+
+@media (max-width: 370px){
+    .stats-container{
+        gap: 0.5rem;
+    }
+}
