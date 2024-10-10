@@ -115,7 +115,7 @@
 
 @media (max-width: 550px) {
     .detail-container-overlay{
-        min-height: 200vh;
+        min-height: 225vh;
     }
   .content-section{
     flex-direction: column;
