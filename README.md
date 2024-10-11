@@ -3,14 +3,7 @@
 The Pokemon Search App is a web application that allows users to explore and retrieve detailed information about Pokémon using the PokeAPI as the backend. The app provides an intuitive and user-friendly interface for searching for any Pokémon by name or Pokédex number. Upon searching, users can view key data about each Pokémon, including stats, types, abilities, evolutions, and more.
 
 ## The technology stack used:
-   - TypeScript
-   - React
-   - Vite
-   - Remix
-   - Eslint
-   - Prettier
-   - Husky
-   - Vitest
+ TypeScript, React, Vite, Remix, Eslint, Prettier, Husky, Vitest
 
 ## Scripts
  Scripts                  |   instructions                         | Comands
@@ -24,7 +17,7 @@ Husky                     | setting up Git hooks:                  | npm run pre
 Vitest                    | run vitest with coverage               | npm run test
 
 ## Instructions for setting up and running the project locally
-- cd graphiql-app
+- cd search-app
 - npm install
 - npm run dev
 - press h + enter to show help
