@@ -2,7 +2,7 @@ import { fireEvent, render, waitFor } from '@testing-library/react';
 import { beforeAll, describe, expect, test, vi } from 'vitest';
 import DownloadCSV from './download_csv';
 import PayloadInterface from '../interfaces/payload_interface';
-import ProviderWrapper from '../utils/provider_wrapper';
+import ProviderWrapper from '../utils/wrappers/provider_wrapper';
 
 describe('DownloadCSV Component', () => {
   beforeAll(() => {

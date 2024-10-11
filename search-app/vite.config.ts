@@ -8,7 +8,8 @@ import { installGlobals } from "@remix-run/node";
 import { vercelPreset } from "@vercel/remix/vite";
 installGlobals();
 export default defineConfig({
-  plugins: [remix({ appDirectory: 'src/app', presets: [vercelPreset()] })],
+  plugins: [process.env.NODE_ENV === "test"
+    ? null: remix({ appDirectory: 'src/app', presets: [vercelPreset()] })],
   test: {
     globals: true,
     environment: 'jsdom',

@@ -1,7 +1,7 @@
 import { json, LoaderFunctionArgs } from '@remix-run/server-runtime';
 import { Outlet } from '@remix-run/react';
 import ItemsList from '../../components/base/items_list/items_list';
-import getSearchQueryData from '../../utils/get-search-query-data';
+import getSearchQueryData from '../../utils/funcs/get-search-query-data';
 import { PokeCall } from '../../interfaces/api_interfaces';
 import Pagination from '../../components/component/pagination/pagination-items-list';
 import SearchBar from '../../components/base/search_bar/search_bar';

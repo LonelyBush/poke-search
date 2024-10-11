@@ -1,6 +1,6 @@
 import { Links, Meta, Outlet, Scripts } from '@remix-run/react';
 import { ThemeProvider } from '../lib/context/theme_context';
-import ProviderWrapper from '../utils/provider_wrapper';
+import ProviderWrapper from '../utils/wrappers/provider_wrapper';
 import '../index.css';
 import DefaultErrorBoundary from '../components/base/error_boundry/error_boundary';
 import Footer from '../components/base/footer/footer';
@@ -13,7 +13,6 @@ export default function App() {
         <link rel="icon" href="/favicon.ico" type="image/x-icon" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Poke Search</title>
-        <Meta />
         <Links />
       </head>
       <body>

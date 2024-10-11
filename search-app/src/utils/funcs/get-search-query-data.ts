@@ -1,4 +1,4 @@
-import { PokeResult } from '../interfaces/api_interfaces';
+import { PokeResult } from '../../interfaces/api_interfaces';
 import getIdFromURL from './get-id-from-url';
 
 const getSearchQueryData = (

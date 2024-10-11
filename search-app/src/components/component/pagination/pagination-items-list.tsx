@@ -7,14 +7,14 @@ import {
 import styles from './pagination-items-style.module.css';
 import useTheme from '../../../hooks/useTheme-hook';
 import { LoaderResponse } from '../../../interfaces/api_interfaces';
-import range from '../../../utils/range-func';
+import range from '../../../utils/funcs/range-func';
 
 function Pagination() {
   const { resultsLength } = useLoaderData<LoaderResponse>();
   const { pageNum } = useParams();
   const [searchParams] = useSearchParams();
   const { theme } = useTheme();
-  const postPerPage = 21;
+  const postPerPage = 20;
   const totalResultsLength = resultsLength || 0;
   const totalPages = Math.ceil(totalResultsLength / postPerPage);
   const totalPagesRange = range(totalPages, 1);
