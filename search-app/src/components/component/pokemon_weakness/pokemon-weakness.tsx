@@ -5,6 +5,7 @@ import { DetailResult } from '../../../interfaces/api_interfaces';
 
 function PokemonWeakness() {
   const { pokemon_weakness } = useLoaderData<DetailResult>();
+  console.log(pokemon_weakness);
   return (
     <div className={styles['pokemon-weaknesses-container']}>
       {pokemon_weakness &&

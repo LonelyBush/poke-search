@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import renderWithProviders from '../../../utils/wrappers/render_with_providers';
 import SearchComponentRow from './search-element';
-import styles from './search-component-row-style.module.css';
+import styles from './search-element-style.module.css';
 
 describe('Test searchcomponent-row', () => {
   it('Should implement add action in reducer', async () => {
