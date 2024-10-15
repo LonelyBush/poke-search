@@ -7,7 +7,7 @@ import {
   removePokemon,
 } from '../../../lib/redux_slice/redux_slice';
 import { SearchRowComponentProps } from '../../../interfaces/props_interfaces';
-import styles from './search-component-row-style.module.css';
+import styles from './search-element-style.module.css';
 import pokeballStatic from '../../../assets/pics/pokeball.png';
 import { useGetPokemonByNameQuery } from '../../../api/getPokemons';
 import CheckBox from '../../ui/check_box/check_box';
@@ -15,7 +15,7 @@ import { RootState } from '../../../lib/store/store';
 import useTheme from '../../../hooks/useTheme-hook';
 import PokemonTypes from '../pokemon_types/pokemon_types';
 
-function SearchComponentRow({ id, poke_id }: SearchRowComponentProps) {
+function SearchElement({ id, poke_id }: SearchRowComponentProps) {
   const store = useSelector((state: RootState) => state.pokeStore);
   const dispatch = useDispatch();
   const { pageNum } = useParams();
@@ -38,8 +38,10 @@ function SearchComponentRow({ id, poke_id }: SearchRowComponentProps) {
     );
   };
   useEffect(() => {
-    setChecked(store.find((elem) => elem.name === data.name) !== undefined);
-  }, [store]);
+    if (data) {
+      setChecked(store.find((elem) => elem.name === data.name) !== undefined);
+    }
+  }, [store, data]);
 
   const { theme } = useTheme();
   return (
@@ -93,4 +95,4 @@ function SearchComponentRow({ id, poke_id }: SearchRowComponentProps) {
   );
 }
 
-export default SearchComponentRow;
+export default SearchElement;

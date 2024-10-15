@@ -1,7 +1,7 @@
 import { json, LoaderFunctionArgs } from '@remix-run/server-runtime';
-import SearchItem from '../../components/base/search_item/search_item';
 import { PokeType } from '../../interfaces/api_interfaces';
 import getIdFromURL from '../../utils/funcs/get-id-from-url';
+import DetailsModal from '../../components/base/details-modal/details-modal';
 
 export async function loader({ params }: LoaderFunctionArgs) {
   const { pokeName } = params;
@@ -75,5 +75,5 @@ export async function loader({ params }: LoaderFunctionArgs) {
 }
 
 export default function Details() {
-  return <SearchItem />;
+  return <DetailsModal />;
 }

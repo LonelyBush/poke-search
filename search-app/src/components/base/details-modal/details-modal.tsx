@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { useLoaderData } from '@remix-run/react';
-import styles from './search_item_style.module.css';
+import styles from './details-modal-style.module.css';
 import PokemonStats from '../../component/pokemon_stats/pokemon_stats';
 import PokemonTypes from '../../component/pokemon_types/pokemon_types';
 import PokemonFlavorText from '../../component/pokemon_flavor-text/pokemon_flavor-text';
@@ -13,7 +13,7 @@ import EvolutionChain from '../../component/evolution_chain/evolution-chain';
 import { DetailResult } from '../../../interfaces/api_interfaces';
 import PokemonTable from '../../component/pokemon_table/pokemon-table';
 
-function SearchItem() {
+function DetailsModal() {
   const { theme } = useTheme();
   const { pokemon_data } = useLoaderData<DetailResult>();
   const navigate = useNavigate();
@@ -58,4 +58,4 @@ function SearchItem() {
   );
 }
 
-export default SearchItem;
+export default DetailsModal;

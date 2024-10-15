@@ -1,23 +1,25 @@
-import { configureStore } from '@reduxjs/toolkit';
-import { setupListeners } from '@reduxjs/toolkit/query';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { pokemonApi } from '../../api/getPokemons';
 import postsReducer from '../redux_slice/redux_slice';
 
-const store = configureStore({
-  reducer: {
-    pokeStore: postsReducer,
-    [pokemonApi.reducerPath]: pokemonApi.reducer,
-  },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      immutableCheck: { warnAfter: 128 },
-      serializableCheck: { warnAfter: 128 },
-    }).concat(pokemonApi.middleware),
+const rootReducer = combineReducers({
+  pokeStore: postsReducer,
+  [pokemonApi.reducerPath]: pokemonApi.reducer,
 });
 
-setupListeners(store.dispatch);
+const setupStore = (preloadedState?: Partial<RootState>) =>
+  configureStore({
+    reducer: rootReducer,
+    preloadedState,
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware({
+        immutableCheck: { warnAfter: 128 },
+        serializableCheck: { warnAfter: 128 },
+      }).concat(pokemonApi.middleware),
+  });
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof rootReducer>;
+export type AppStore = ReturnType<typeof setupStore>;
+export type AppDispatch = AppStore['dispatch'];
 
-export default store;
+export default setupStore;

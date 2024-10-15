@@ -2,7 +2,7 @@ import { Links, Meta, Outlet, Scripts } from '@remix-run/react';
 import { ThemeProvider } from '../lib/context/theme_context';
 import ProviderWrapper from '../utils/wrappers/provider_wrapper';
 import '../index.css';
-import DefaultErrorBoundary from '../components/base/error_boundry/error_boundary';
+import DefaultErrorBoundary from '../components/base/error_boundary/error_boundary';
 import Footer from '../components/base/footer/footer';
 
 export default function App() {

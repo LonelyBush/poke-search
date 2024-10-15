@@ -1,11 +1,11 @@
 import { Provider } from 'react-redux';
 import { ReactNode } from 'react';
-import store from '../../lib/store/store';
 import { ThemeProvider } from '../../lib/context/theme_context';
+import setupStore from '../../lib/store/store';
 
 function ProviderWrapper({ children }: { children: ReactNode }) {
   return (
-    <Provider store={store}>
+    <Provider store={setupStore()}>
       <ThemeProvider>{children}</ThemeProvider>
     </Provider>
   );
