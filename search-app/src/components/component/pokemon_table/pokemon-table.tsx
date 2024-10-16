@@ -72,8 +72,9 @@ function PokemonTable() {
         </div>
         <div>
           Abilities
-          {filteredAbilites.map((elem) => (
+          {filteredAbilites.map((elem, i) => (
             <p
+              aria-label={`ability-pointer-${i}`}
               className={styles['ability-pointer-select']}
               onClick={() => handleOpenAbilityDetails(elem.ability.name)}
               key={elem.ability.name}
@@ -86,6 +87,7 @@ function PokemonTable() {
         </div>
       </div>
       <div
+        aria-label="ability-description"
         className={`${styles['ability-description-block']} ${styles[`${theme}`]} ${show ? styles.open : ''}`}
       >
         <div className={styles['ability-header-block']}>
