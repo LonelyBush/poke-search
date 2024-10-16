@@ -11,7 +11,7 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
   const { pageNum } = params;
   const url = new URL(request.url);
   const searchQuery = url.searchParams.get('query');
-  const postPerPage = 21;
+  const postPerPage = 20;
   let currentPosts;
   let resultsLength;
   try {

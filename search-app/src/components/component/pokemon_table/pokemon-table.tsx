@@ -63,13 +63,16 @@ function PokemonTable() {
         </div>
       </div>
       <div className={styles['pokemon-shape-abilities-column']}>
-        <div>
-          Shape
-          <p>
-            {pokemon_species.shape.name.charAt(0).toUpperCase() +
-              pokemon_species.shape.name.slice(1)}
-          </p>
-        </div>
+        {pokemon_species.shape !== null && (
+          <div>
+            Shape
+            <p>
+              {pokemon_species.shape.name.charAt(0).toUpperCase() +
+                pokemon_species.shape.name.slice(1)}
+            </p>
+          </div>
+        )}
+
         <div>
           Abilities
           {filteredAbilites.map((elem, i) => (
