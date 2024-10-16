@@ -82,7 +82,7 @@ input[type="text"]:focus {
 .input-wrapper > button {
     display: inline-block;
     position: absolute;
-    right: 8.5rem;
+    right: 10.5rem;
     top: 5.4rem;
     z-index: 1;
 }
@@ -102,7 +102,7 @@ input[type="text"]:focus {
         padding: 0 1rem;
     }
     .input-wrapper > button {
-        right: 7.5rem;
+        right: 9.5rem;
         z-index: 1;
     }
 

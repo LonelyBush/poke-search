@@ -2,10 +2,9 @@
 
 .footer-container{
     font-size: 1.2rem;
-    padding-right: 1rem;
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
+    justify-content: center;
     gap: 2rem;
     border: var(--c-main-border);
     border-top: 0;

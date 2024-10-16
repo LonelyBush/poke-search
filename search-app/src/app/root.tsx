@@ -3,7 +3,6 @@ import { ThemeProvider } from '../lib/context/theme_context';
 import ProviderWrapper from '../utils/wrappers/provider_wrapper';
 import '../index.css';
 import DefaultErrorBoundary from '../components/base/error_boundary/error_boundary';
-import Footer from '../components/base/footer/footer';
 
 export default function App() {
   return (
@@ -18,10 +17,7 @@ export default function App() {
       <body>
         <ProviderWrapper>
           <ThemeProvider>
-            <div id="root">
-              <Outlet />
-            </div>
-            <Footer />
+            <Outlet />
           </ThemeProvider>
         </ProviderWrapper>
         <Scripts />

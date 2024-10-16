@@ -7,9 +7,10 @@
     gap: 1.5rem;
     padding: 1.4rem 0;
     width: 100%;
-    height: 65vh;
+    height: 69.4vh;
     overflow-y: scroll;
     border: var(--c-main-border);
+    border-bottom: 0;
     background-color: var(--c-main-white)
 }
 
@@ -21,6 +22,7 @@
 
 .items-list-container.dark{
     border: 0.1rem solid var(--c-dark-300);
+    border-bottom: 0;
     background-color: var(--c-dark-500)
 }
 
