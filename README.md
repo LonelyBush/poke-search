@@ -2,6 +2,9 @@
 
 The Pokemon Search App is a web application that allows users to explore and retrieve detailed information about Pokémon using the PokeAPI as the backend. The app provides an intuitive and user-friendly interface for searching for any Pokémon by name or Pokédex number. Upon searching, users can view key data about each Pokémon, including stats, types, abilities, evolutions, and more.
 
+## Deploy
+https://poke-search-app-ashen.vercel.app/page/1
+
 ## The technology stack used:
  TypeScript, React, Vite, Remix, Eslint, Prettier, Husky, Vitest
 
