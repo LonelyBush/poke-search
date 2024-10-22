@@ -14,6 +14,7 @@ import CheckBox from '../../ui/check_box/check_box';
 import { RootState } from '../../../lib/store/store';
 import useTheme from '../../../hooks/useTheme-hook';
 import PokemonTypes from '../pokemon_types/pokemon_types';
+import { PokeType } from '../../../interfaces/api_interfaces';
 
 function SearchElement({ id, poke_id }: SearchRowComponentProps) {
   const store = useSelector((state: RootState) => state.pokeStore);
@@ -28,8 +29,21 @@ function SearchElement({ id, poke_id }: SearchRowComponentProps) {
     const createJson = {
       id,
       name: data.name,
-      height: data.height,
-      experience: data.base_experience,
+      height: `${data.height / 10} m`,
+      weight: `${data.weight / 10} kg`,
+      stats: data.stats
+        .filter(
+          (elem: typeof data.stats) =>
+            elem.stat.name !== 'special-defense' &&
+            elem.stat.name !== 'special-attack',
+        )
+        .map(
+          (elem: typeof data.stats) => `${elem.stat.name}-${elem.base_stat}`,
+        ),
+      types: data.types.map((elem: PokeType) => elem.type.name),
+      abilities: data.abilities
+        .filter((elem: typeof data.abilities) => elem.is_hidden === false)
+        .map((elem: typeof data.abilities) => elem.ability.name),
     };
     dispatch(
       e.currentTarget.checked
