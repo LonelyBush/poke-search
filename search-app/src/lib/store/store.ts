@@ -1,5 +1,5 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import { pokemonApi } from '../../api/getPokemons';
+import { pokemonApi } from '../redux_slice/getPokemons';
 import postsReducer from '../redux_slice/redux_slice';
 
 const rootReducer = combineReducers({

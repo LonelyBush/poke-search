@@ -4,7 +4,7 @@ import { FaRegCircleQuestion } from 'react-icons/fa6';
 import styles from './pokemon-table-style.module.css';
 import { DetailResult } from '../../../interfaces/api_interfaces';
 import CloseBtn from '../../ui/close_btn/close_btn';
-import { useGetAbilityByNumberQuery } from '../../../api/getPokemons';
+import { useGetAbilityByNumberQuery } from '../../../lib/redux_slice/getPokemons';
 import useTheme from '../../../hooks/useTheme-hook';
 
 function PokemonTable() {
