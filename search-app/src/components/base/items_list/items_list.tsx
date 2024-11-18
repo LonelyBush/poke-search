@@ -1,10 +1,10 @@
 import { useLoaderData } from '@remix-run/react';
 import styles from './items_list_style.module.css';
 import { LoaderResponse } from '../../../interfaces/api_interfaces';
-import EmptySearchResult from '../../component/empry-search-result/empty-search-result';
+import EmptySearchResult from '../empry-search-result/empty-search-result';
 import useTheme from '../../../hooks/useTheme-hook';
 import getIdFromURL from '../../../utils/funcs/get-id-from-url';
-import SearchElement from '../../component/search-element/search-element';
+import SearchElement from '../search-element/search-element';
 
 function ItemsList() {
   const { currentPosts } = useLoaderData<LoaderResponse>();

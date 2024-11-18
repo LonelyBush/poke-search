@@ -1,6 +1,6 @@
 import { useLoaderData } from '@remix-run/react';
 import styles from './evolution-chain.module.css';
-import SearchComponentRow from '../search-element/search-element';
+import SearchComponentRow from '../../base/search-element/search-element';
 import { DetailResult } from '../../../interfaces/api_interfaces';
 import useTheme from '../../../hooks/useTheme-hook';
 

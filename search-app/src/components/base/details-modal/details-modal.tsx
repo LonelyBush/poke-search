@@ -3,15 +3,15 @@
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { useLoaderData } from '@remix-run/react';
 import styles from './details-modal-style.module.css';
-import PokemonStats from '../../component/pokemon_stats/pokemon_stats';
-import PokemonTypes from '../../component/pokemon_types/pokemon_types';
-import PokemonFlavorText from '../../component/pokemon_flavor-text/pokemon_flavor-text';
+import PokemonStats from '../../pokemon/pokemon_stats/pokemon_stats';
+import PokemonTypes from '../../pokemon/pokemon_types/pokemon_types';
+import PokemonFlavorText from '../../pokemon/pokemon_flavor-text/pokemon_flavor-text';
 import CloseBtn from '../../ui/close_btn/close_btn';
 import useTheme from '../../../hooks/useTheme-hook';
-import PokemonWeakness from '../../component/pokemon_weakness/pokemon-weakness';
-import EvolutionChain from '../../component/evolution_chain/evolution-chain';
+import PokemonWeakness from '../../pokemon/pokemon_weakness/pokemon-weakness';
+import EvolutionChain from '../../pokemon/evolution_chain/evolution-chain';
 import { DetailResult } from '../../../interfaces/api_interfaces';
-import PokemonTable from '../../component/pokemon_table/pokemon-table';
+import PokemonTable from '../../pokemon/pokemon_table/pokemon-table';
 
 function DetailsModal() {
   const { theme } = useTheme();

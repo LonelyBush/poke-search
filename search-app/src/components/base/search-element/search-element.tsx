@@ -2,10 +2,7 @@
 import { NavLink, useParams, useSearchParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { ChangeEvent, useEffect, useState } from 'react';
-import {
-  addPokemon,
-  removePokemon,
-} from '../../../lib/redux_slice/redux_slice';
+import { addPokemon, removePokemon } from '../../../lib/redux_slice/redux_slice';
 import { SearchRowComponentProps } from '../../../interfaces/props_interfaces';
 import styles from './search-element-style.module.css';
 import pokeballStatic from '../../../assets/pics/pokeball.png';
@@ -13,7 +10,7 @@ import { useGetPokemonByNameQuery } from '../../../api/getPokemons';
 import CheckBox from '../../ui/check_box/check_box';
 import { RootState } from '../../../lib/store/store';
 import useTheme from '../../../hooks/useTheme-hook';
-import PokemonTypes from '../pokemon_types/pokemon_types';
+import PokemonTypes from '../../pokemon/pokemon_types/pokemon_types';
 import { PokeType } from '../../../interfaces/api_interfaces';
 
 function SearchElement({ id, poke_id }: SearchRowComponentProps) {

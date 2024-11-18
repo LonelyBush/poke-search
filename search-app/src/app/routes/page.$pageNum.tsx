@@ -3,7 +3,7 @@ import { Outlet } from '@remix-run/react';
 import ItemsList from '../../components/base/items_list/items_list';
 import getSearchQueryData from '../../utils/funcs/get-search-query-data';
 import { PokeCall } from '../../interfaces/api_interfaces';
-import Pagination from '../../components/component/pagination/pagination-items-list';
+import Pagination from '../../components/base/pagination/pagination-items-list';
 import SearchBar from '../../components/base/search_bar/search_bar';
 import Footer from '../../components/base/footer/footer';
 
